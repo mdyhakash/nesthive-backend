@@ -1,0 +1,19 @@
+model Tenant {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  contactNumber String?
+  address       String?
+  gender        Gender?
+  nidNumber     String?
+  isDeleted     Boolean   @default(false)
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  userId String @unique
+
+  @@index([email], name: "idx_tenant_email")
+  @@index([isDeleted], name: "idx_tenant_isDeleted")
+  @@map("tenants")
+}
