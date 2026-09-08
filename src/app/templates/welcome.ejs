@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Nest Hive</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f7fb;
+        color: #1f2937;
+        line-height: 1.6;
+        padding: 40px 16px;
+      }
+
+      .email-wrapper {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .email-container {
+        background-color: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .header {
+        background-color: #111827;
+        padding: 30px 24px;
+        text-align: center;
+      }
+
+      .logo {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      .logo span {
+        color: #6366f1;
+      }
+
+      .hero {
+        padding: 45px 32px 35px;
+        text-align: center;
+      }
+
+      .welcome-icon {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 24px;
+        background-color: #eef2ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+      }
+
+      .title {
+        font-size: 30px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 12px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: #6b7280;
+        max-width: 450px;
+        margin: 0 auto;
+      }
+
+      .content {
+        padding: 0 32px 40px;
+      }
+
+      .greeting {
+        font-size: 16px;
+        color: #374151;
+        margin-bottom: 18px;
+      }
+
+      .message {
+        font-size: 15px;
+        color: #6b7280;
+        margin-bottom: 28px;
+      }
+
+      .closing {
+        text-align: center;
+        font-size: 14px;
+        color: #9ca3af;
+      }
+
+      .footer {
+        border-top: 1px solid #f3f4f6;
+        padding: 24px 32px;
+        text-align: center;
+        background-color: #fafafa;
+      }
+
+      .footer-text {
+        color: #9ca3af;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .footer-brand {
+        color: #6b7280;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        .hero {
+          padding: 35px 20px 25px;
+        }
+
+        .content {
+          padding: 0 20px 32px;
+        }
+
+        .title {
+          font-size: 25px;
+        }
+
+        .footer {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="email-wrapper">
+      <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+          <div class="logo">Nest<span>Hive</span></div>
+        </div>
+
+        <!-- Welcome Hero -->
+        <div class="hero">
+          <div class="welcome-icon">👋</div>
+
+          <h1 class="title">Welcome to Nest Hive!</h1>
+
+          <p class="subtitle">
+            We're excited to have you here. Your Nest Hive journey starts now.
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+          <p class="greeting">Hi <strong><%= name %></strong>,</p>
+
+          <p class="message">
+            Welcome to Nest Hive! Your account has been successfully created.
+            We're glad to have you as part of our growing community.
+          </p>
+
+          <p class="closing">
+            Thanks for choosing Nest Hive. We're happy you're here! ❤️
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <p class="footer-text">
+            This is an automated email. Please do not reply to this message.
+          </p>
+
+          <p class="footer-brand">
+            © <%= new Date().getFullYear() %> Nest Hive. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
