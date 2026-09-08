@@ -4,7 +4,12 @@ import { redisClient } from "../../lib/redis";
 import crypto from "crypto";
 import { AppError } from "../../utils/AppError";
 import httpStatus from "http-status";
-import { IRegisterTenantPayload, IVerifyEmailPayload } from "./auth.interface";
+import {
+  ILoginUserPayload,
+  IRegisterTenantPayload,
+  IRequestUser,
+  IVerifyEmailPayload,
+} from "./auth.interface";
 import { Role, UserStatus } from "../../../generated/prisma/enums";
 import path from "path";
 import config from "../../config";
@@ -193,7 +198,90 @@ const verifyTenantEmail = async (payload: IVerifyEmailPayload) => {
   };
 };
 
+const loginUser = async (payload: ILoginUserPayload) => {
+  const { password } = payload;
+  const email = payload.email.trim().toLowerCase();
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User Not Found");
+  }
+
+  if (user.status === UserStatus.BLOCKED) {
+    throw new AppError(httpStatus.FORBIDDEN, "User is blocked");
+  }
+
+  if (user.isDeleted || user.status === UserStatus.DELETED) {
+    throw new AppError(httpStatus.FORBIDDEN, "User is deleted");
+  }
+
+  if (user.password === null && user.googleId !== null) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "User Already Has Account Registered With Google. Try To Login With Google.",
+    );
+  }
+
+  const isPasswordMatched = await bcrypt.compare(
+    password,
+    user.password as string,
+  );
+
+  if (!isPasswordMatched) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "Invalid credentials");
+  }
+
+  const jwtPayload = {
+    userId: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions,
+  );
+
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions,
+  );
+
+  return {
+    accessToken,
+    refreshToken,
+  };
+};
+
+const getMe = async (user: IRequestUser) => {
+  const isUserExists = await prisma.user.findUnique({
+    where: {
+      id: user.userId,
+    },
+    include: {
+      tenant: true,
+    },
+    omit: {
+      password: true,
+    },
+  });
+
+  if (!isUserExists) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  return isUserExists;
+};
+
 export const authService = {
   registerTenant,
   verifyTenantEmail,
+  loginUser,
+  getMe,
 };

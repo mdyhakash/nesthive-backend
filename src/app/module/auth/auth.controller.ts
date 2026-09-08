@@ -3,6 +3,8 @@ import { catchAsync } from "../../utils/catchAsync";
 import { authService } from "./auth.service";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status";
+import { AppError } from "../../utils/AppError";
+import { IRequestUser } from "./auth.interface";
 
 const registerTenant = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
@@ -49,7 +51,59 @@ const verifyTenantEmail = catchAsync(async (req: Request, res: Response) => {
     },
   });
 });
+
+const loginUser = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const result = await authService.loginUser(payload);
+
+  const { accessToken, refreshToken } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24,
+  });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "User logged in successfully",
+    data: {
+      accessToken,
+      refreshToken,
+    },
+  });
+});
+
+const getMe = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user as unknown as IRequestUser;
+
+  if (!user) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      "User information is missing in the request",
+    );
+  }
+  const result = await authService.getMe(user);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User profile fetched successfully",
+    data: result,
+  });
+});
+
 export const authController = {
   registerTenant,
   verifyTenantEmail,
+  loginUser,
+  getMe,
 };
