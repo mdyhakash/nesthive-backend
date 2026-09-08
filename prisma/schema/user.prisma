@@ -16,6 +16,12 @@ model User {
   createdAt          DateTime     @default(now())
   updatedAt          DateTime     @updatedAt
 
+  tenant Tenant?
+  owner  Owner?
+
+  notifications Notification[]
+  auditLogs     AuditLog[]
+
   @@unique([email])
   @@map("users")
 }

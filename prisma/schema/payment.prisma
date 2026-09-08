@@ -1,0 +1,41 @@
+model Payment {
+  id String @id @default(uuid())
+
+  type   PaymentType
+  status PaymentStatus @default(UNPAID)
+
+  amount   Decimal @db.Decimal(10, 2)
+  currency String  @default("BDT")
+
+  paymentGateway        PaymentGateway @default(BKASH)
+  merchantInvoiceNumber String         @unique
+
+  bkashPaymentId String? @unique
+  bkashTrxId     String?
+  payerReference String?
+  paidAt         String?
+
+  gatewayResponse Json?
+
+  refundTrxId  String?
+  refundAmount Decimal? @db.Decimal(10, 2)
+  refundReason String?
+  refundedAt   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leaseId String?
+  lease   Lease?  @relation(fields: [leaseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  applicationId String? // set for DEPOSIT payments, before the Lease row exists
+
+  utilityBillSplitId String?           @unique
+  utilityBillSplit    UtilityBillSplit? @relation(fields: [utilityBillSplitId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([tenantId, type, status], name: "idx_payment_tenant_type_status")
+  @@map("payments")
+}

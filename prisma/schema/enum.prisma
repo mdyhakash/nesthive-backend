@@ -19,3 +19,115 @@ enum Gender {
   FEMALE
   OTHER
 }
+enum OwnerVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ListingStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  STUDIO
+  HOSTEL
+}
+
+enum RoomType {
+  SINGLE
+  SHARED
+}
+
+enum OccupancyStatus {
+  ACTIVE
+  MOVED_OUT
+}
+
+enum ViewingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+  COMPLETED
+}
+
+enum ApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+enum LeaseStatus {
+  ACTIVE
+  TERMINATED
+  EXPIRED
+}
+
+enum PaymentType {
+  DEPOSIT
+  RENT
+  UTILITY
+}
+
+enum PaymentGateway {
+  BKASH
+  SSLCOMMERZ
+  STRIPE
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum SplitType {
+  EQUAL
+  CUSTOM
+}
+
+enum BillStatus {
+  UNSETTLED
+  SETTLED
+}
+
+enum BillSplitStatus {
+  UNPAID
+  PAID
+}
+
+enum MaintenancePriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum MaintenanceStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum DocumentType {
+  OWNER_KYC
+  PROPERTY_IMAGE
+  ROOM_IMAGE
+  LEASE_AGREEMENT
+}
+
+enum NotificationType {
+  APPLICATION_UPDATE
+  VIEWING_UPDATE
+  PAYMENT_UPDATE
+  LEASE_UPDATE
+  MAINTENANCE_UPDATE
+  SYSTEM
+}

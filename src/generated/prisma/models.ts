@@ -8,6 +8,21 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Application'
+export type * from './models/AuditLog'
+export type * from './models/Document'
+export type * from './models/Lease'
+export type * from './models/MaintenanceRequest'
+export type * from './models/Notification'
+export type * from './models/Owner'
+export type * from './models/Payment'
+export type * from './models/Property'
+export type * from './models/Room'
+export type * from './models/RoomOccupant'
+export type * from './models/RoommatePreference'
 export type * from './models/Tenant'
 export type * from './models/User'
+export type * from './models/UtilityBill'
+export type * from './models/UtilityBillSplit'
+export type * from './models/ViewingRequest'
 export type * from './commonInputTypes'

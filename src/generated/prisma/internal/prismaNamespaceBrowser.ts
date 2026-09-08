@@ -51,8 +51,23 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Application: 'Application',
+  AuditLog: 'AuditLog',
+  Document: 'Document',
+  Lease: 'Lease',
+  MaintenanceRequest: 'MaintenanceRequest',
+  Notification: 'Notification',
+  Owner: 'Owner',
+  Payment: 'Payment',
+  Property: 'Property',
+  Room: 'Room',
+  RoomOccupant: 'RoomOccupant',
+  RoommatePreference: 'RoommatePreference',
   Tenant: 'Tenant',
-  User: 'User'
+  User: 'User',
+  UtilityBill: 'UtilityBill',
+  UtilityBillSplit: 'UtilityBillSplit',
+  ViewingRequest: 'ViewingRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -69,6 +84,222 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const ApplicationScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  paymentDeadline: 'paymentDeadline',
+  rejectionReason: 'rejectionReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roomId: 'roomId',
+  tenantId: 'tenantId'
+} as const
+
+export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  meta: 'meta',
+  createdAt: 'createdAt',
+  actorId: 'actorId'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  fileUrl: 'fileUrl',
+  publicId: 'publicId',
+  createdAt: 'createdAt',
+  ownerId: 'ownerId',
+  propertyId: 'propertyId',
+  roomId: 'roomId',
+  leaseId: 'leaseId'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const LeaseScalarFieldEnum = {
+  id: 'id',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  rentAmount: 'rentAmount',
+  securityDeposit: 'securityDeposit',
+  status: 'status',
+  terminatedAt: 'terminatedAt',
+  terminationReason: 'terminationReason',
+  agreementUrl: 'agreementUrl',
+  agreementPublicId: 'agreementPublicId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  applicationId: 'applicationId',
+  roomId: 'roomId',
+  tenantId: 'tenantId',
+  ownerId: 'ownerId'
+} as const
+
+export type LeaseScalarFieldEnum = (typeof LeaseScalarFieldEnum)[keyof typeof LeaseScalarFieldEnum]
+
+
+export const MaintenanceRequestScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  priority: 'priority',
+  status: 'status',
+  assignedTo: 'assignedTo',
+  resolutionNote: 'resolutionNote',
+  imageUrl: 'imageUrl',
+  imagePublicId: 'imagePublicId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roomId: 'roomId',
+  tenantId: 'tenantId'
+} as const
+
+export type MaintenanceRequestScalarFieldEnum = (typeof MaintenanceRequestScalarFieldEnum)[keyof typeof MaintenanceRequestScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  message: 'message',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const OwnerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  contactNumber: 'contactNumber',
+  address: 'address',
+  nidNumber: 'nidNumber',
+  verificationStatus: 'verificationStatus',
+  rejectionReason: 'rejectionReason',
+  reviewedBy: 'reviewedBy',
+  reviewedAt: 'reviewedAt',
+  kycDocumentUrl: 'kycDocumentUrl',
+  kycDocumentPublicId: 'kycDocumentPublicId',
+  additionalFiles: 'additionalFiles',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type OwnerScalarFieldEnum = (typeof OwnerScalarFieldEnum)[keyof typeof OwnerScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  status: 'status',
+  amount: 'amount',
+  currency: 'currency',
+  paymentGateway: 'paymentGateway',
+  merchantInvoiceNumber: 'merchantInvoiceNumber',
+  bkashPaymentId: 'bkashPaymentId',
+  bkashTrxId: 'bkashTrxId',
+  payerReference: 'payerReference',
+  paidAt: 'paidAt',
+  gatewayResponse: 'gatewayResponse',
+  refundTrxId: 'refundTrxId',
+  refundAmount: 'refundAmount',
+  refundReason: 'refundReason',
+  refundedAt: 'refundedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  leaseId: 'leaseId',
+  applicationId: 'applicationId',
+  utilityBillSplitId: 'utilityBillSplitId',
+  tenantId: 'tenantId'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const PropertyScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  address: 'address',
+  city: 'city',
+  area: 'area',
+  type: 'type',
+  amenities: 'amenities',
+  status: 'status',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ownerId: 'ownerId'
+} as const
+
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
+
+
+export const RoomScalarFieldEnum = {
+  id: 'id',
+  roomNumber: 'roomNumber',
+  roomType: 'roomType',
+  rentAmount: 'rentAmount',
+  capacity: 'capacity',
+  occupantCount: 'occupantCount',
+  availableFrom: 'availableFrom',
+  status: 'status',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  propertyId: 'propertyId'
+} as const
+
+export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const RoomOccupantScalarFieldEnum = {
+  id: 'id',
+  moveInDate: 'moveInDate',
+  moveOutDate: 'moveOutDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roomId: 'roomId',
+  tenantId: 'tenantId'
+} as const
+
+export type RoomOccupantScalarFieldEnum = (typeof RoomOccupantScalarFieldEnum)[keyof typeof RoomOccupantScalarFieldEnum]
+
+
+export const RoommatePreferenceScalarFieldEnum = {
+  id: 'id',
+  budgetMin: 'budgetMin',
+  budgetMax: 'budgetMax',
+  preferredArea: 'preferredArea',
+  moveInDate: 'moveInDate',
+  lifestyleTags: 'lifestyleTags',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  tenantId: 'tenantId'
+} as const
+
+export type RoommatePreferenceScalarFieldEnum = (typeof RoommatePreferenceScalarFieldEnum)[keyof typeof RoommatePreferenceScalarFieldEnum]
 
 
 export const TenantScalarFieldEnum = {
@@ -111,12 +342,62 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const UtilityBillScalarFieldEnum = {
+  id: 'id',
+  month: 'month',
+  totalAmount: 'totalAmount',
+  splitType: 'splitType',
+  status: 'status',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roomId: 'roomId'
+} as const
+
+export type UtilityBillScalarFieldEnum = (typeof UtilityBillScalarFieldEnum)[keyof typeof UtilityBillScalarFieldEnum]
+
+
+export const UtilityBillSplitScalarFieldEnum = {
+  id: 'id',
+  shareAmount: 'shareAmount',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  utilityBillId: 'utilityBillId',
+  tenantId: 'tenantId'
+} as const
+
+export type UtilityBillSplitScalarFieldEnum = (typeof UtilityBillSplitScalarFieldEnum)[keyof typeof UtilityBillSplitScalarFieldEnum]
+
+
+export const ViewingRequestScalarFieldEnum = {
+  id: 'id',
+  requestedAt: 'requestedAt',
+  status: 'status',
+  ownerNote: 'ownerNote',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  roomId: 'roomId',
+  tenantId: 'tenantId'
+} as const
+
+export type ViewingRequestScalarFieldEnum = (typeof ViewingRequestScalarFieldEnum)[keyof typeof ViewingRequestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -133,4 +414,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

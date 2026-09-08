@@ -18,6 +18,66 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
+ * Model Application
+ * 
+ */
+export type Application = Prisma.ApplicationModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model Lease
+ * 
+ */
+export type Lease = Prisma.LeaseModel
+/**
+ * Model MaintenanceRequest
+ * 
+ */
+export type MaintenanceRequest = Prisma.MaintenanceRequestModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model Owner
+ * 
+ */
+export type Owner = Prisma.OwnerModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model Property
+ * 
+ */
+export type Property = Prisma.PropertyModel
+/**
+ * Model Room
+ * 
+ */
+export type Room = Prisma.RoomModel
+/**
+ * Model RoomOccupant
+ * 
+ */
+export type RoomOccupant = Prisma.RoomOccupantModel
+/**
+ * Model RoommatePreference
+ * 
+ */
+export type RoommatePreference = Prisma.RoommatePreferenceModel
+/**
  * Model Tenant
  * 
  */
@@ -27,3 +87,18 @@ export type Tenant = Prisma.TenantModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model UtilityBill
+ * 
+ */
+export type UtilityBill = Prisma.UtilityBillModel
+/**
+ * Model UtilityBillSplit
+ * 
+ */
+export type UtilityBillSplit = Prisma.UtilityBillSplitModel
+/**
+ * Model ViewingRequest
+ * 
+ */
+export type ViewingRequest = Prisma.ViewingRequestModel

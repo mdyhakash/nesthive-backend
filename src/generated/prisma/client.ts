@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Tenants
- * const tenants = await prisma.tenant.findMany()
+ * // Fetch zero or more Applications
+ * const applications = await prisma.application.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -41,6 +41,66 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
+/**
+ * Model Application
+ * 
+ */
+export type Application = Prisma.ApplicationModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model Lease
+ * 
+ */
+export type Lease = Prisma.LeaseModel
+/**
+ * Model MaintenanceRequest
+ * 
+ */
+export type MaintenanceRequest = Prisma.MaintenanceRequestModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model Owner
+ * 
+ */
+export type Owner = Prisma.OwnerModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model Property
+ * 
+ */
+export type Property = Prisma.PropertyModel
+/**
+ * Model Room
+ * 
+ */
+export type Room = Prisma.RoomModel
+/**
+ * Model RoomOccupant
+ * 
+ */
+export type RoomOccupant = Prisma.RoomOccupantModel
+/**
+ * Model RoommatePreference
+ * 
+ */
+export type RoommatePreference = Prisma.RoommatePreferenceModel
 /**
  * Model Tenant
  * 
@@ -51,3 +111,18 @@ export type Tenant = Prisma.TenantModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model UtilityBill
+ * 
+ */
+export type UtilityBill = Prisma.UtilityBillModel
+/**
+ * Model UtilityBillSplit
+ * 
+ */
+export type UtilityBillSplit = Prisma.UtilityBillSplitModel
+/**
+ * Model ViewingRequest
+ * 
+ */
+export type ViewingRequest = Prisma.ViewingRequestModel

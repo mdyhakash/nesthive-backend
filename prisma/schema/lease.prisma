@@ -1,0 +1,35 @@
+model Lease {
+  id                 String      @id @default(uuid())
+  startDate          DateTime
+  endDate            DateTime?
+  rentAmount         Decimal     @db.Decimal(10, 2)
+  securityDeposit    Decimal     @db.Decimal(10, 2)
+  status             LeaseStatus @default(ACTIVE)
+  terminatedAt       DateTime?
+  terminationReason  String?
+
+  agreementUrl      String?
+  agreementPublicId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  applicationId String      @unique
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  roomId String
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  ownerId String
+  owner   Owner  @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  payments  Payment[]
+  documents Document[]
+
+  @@index([tenantId, status], name: "idx_lease_tenant_status")
+  @@index([roomId, status], name: "idx_lease_room_status")
+  @@map("leases")
+}

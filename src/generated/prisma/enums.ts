@@ -43,3 +43,170 @@ export const Gender = {
 } as const
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const OwnerVerificationStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type OwnerVerificationStatus = (typeof OwnerVerificationStatus)[keyof typeof OwnerVerificationStatus]
+
+
+export const ListingStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type ListingStatus = (typeof ListingStatus)[keyof typeof ListingStatus]
+
+
+export const PropertyType = {
+  APARTMENT: 'APARTMENT',
+  HOUSE: 'HOUSE',
+  STUDIO: 'STUDIO',
+  HOSTEL: 'HOSTEL'
+} as const
+
+export type PropertyType = (typeof PropertyType)[keyof typeof PropertyType]
+
+
+export const RoomType = {
+  SINGLE: 'SINGLE',
+  SHARED: 'SHARED'
+} as const
+
+export type RoomType = (typeof RoomType)[keyof typeof RoomType]
+
+
+export const OccupancyStatus = {
+  ACTIVE: 'ACTIVE',
+  MOVED_OUT: 'MOVED_OUT'
+} as const
+
+export type OccupancyStatus = (typeof OccupancyStatus)[keyof typeof OccupancyStatus]
+
+
+export const ViewingStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ViewingStatus = (typeof ViewingStatus)[keyof typeof ViewingStatus]
+
+
+export const ApplicationStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]
+
+
+export const LeaseStatus = {
+  ACTIVE: 'ACTIVE',
+  TERMINATED: 'TERMINATED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type LeaseStatus = (typeof LeaseStatus)[keyof typeof LeaseStatus]
+
+
+export const PaymentType = {
+  DEPOSIT: 'DEPOSIT',
+  RENT: 'RENT',
+  UTILITY: 'UTILITY'
+} as const
+
+export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
+
+
+export const PaymentGateway = {
+  BKASH: 'BKASH',
+  SSLCOMMERZ: 'SSLCOMMERZ',
+  STRIPE: 'STRIPE'
+} as const
+
+export type PaymentGateway = (typeof PaymentGateway)[keyof typeof PaymentGateway]
+
+
+export const PaymentStatus = {
+  UNPAID: 'UNPAID',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const SplitType = {
+  EQUAL: 'EQUAL',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type SplitType = (typeof SplitType)[keyof typeof SplitType]
+
+
+export const BillStatus = {
+  UNSETTLED: 'UNSETTLED',
+  SETTLED: 'SETTLED'
+} as const
+
+export type BillStatus = (typeof BillStatus)[keyof typeof BillStatus]
+
+
+export const BillSplitStatus = {
+  UNPAID: 'UNPAID',
+  PAID: 'PAID'
+} as const
+
+export type BillSplitStatus = (typeof BillSplitStatus)[keyof typeof BillSplitStatus]
+
+
+export const MaintenancePriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+} as const
+
+export type MaintenancePriority = (typeof MaintenancePriority)[keyof typeof MaintenancePriority]
+
+
+export const MaintenanceStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED'
+} as const
+
+export type MaintenanceStatus = (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus]
+
+
+export const DocumentType = {
+  OWNER_KYC: 'OWNER_KYC',
+  PROPERTY_IMAGE: 'PROPERTY_IMAGE',
+  ROOM_IMAGE: 'ROOM_IMAGE',
+  LEASE_AGREEMENT: 'LEASE_AGREEMENT'
+} as const
+
+export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
+
+
+export const NotificationType = {
+  APPLICATION_UPDATE: 'APPLICATION_UPDATE',
+  VIEWING_UPDATE: 'VIEWING_UPDATE',
+  PAYMENT_UPDATE: 'PAYMENT_UPDATE',
+  LEASE_UPDATE: 'LEASE_UPDATE',
+  MAINTENANCE_UPDATE: 'MAINTENANCE_UPDATE',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

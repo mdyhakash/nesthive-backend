@@ -238,6 +238,15 @@ export type TenantWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   userId?: Prisma.StringFilter<"Tenant"> | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  roommatePreference?: Prisma.XOR<Prisma.RoommatePreferenceNullableScalarRelationFilter, Prisma.RoommatePreferenceWhereInput> | null
+  viewingRequests?: Prisma.ViewingRequestListRelationFilter
+  applications?: Prisma.ApplicationListRelationFilter
+  roomOccupancies?: Prisma.RoomOccupantListRelationFilter
+  leases?: Prisma.LeaseListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
+  utilityBillSplits?: Prisma.UtilityBillSplitListRelationFilter
+  maintenanceRequests?: Prisma.MaintenanceRequestListRelationFilter
 }
 
 export type TenantOrderByWithRelationInput = {
@@ -253,6 +262,15 @@ export type TenantOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  user?: Prisma.UserOrderByWithRelationInput
+  roommatePreference?: Prisma.RoommatePreferenceOrderByWithRelationInput
+  viewingRequests?: Prisma.ViewingRequestOrderByRelationAggregateInput
+  applications?: Prisma.ApplicationOrderByRelationAggregateInput
+  roomOccupancies?: Prisma.RoomOccupantOrderByRelationAggregateInput
+  leases?: Prisma.LeaseOrderByRelationAggregateInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
+  utilityBillSplits?: Prisma.UtilityBillSplitOrderByRelationAggregateInput
+  maintenanceRequests?: Prisma.MaintenanceRequestOrderByRelationAggregateInput
 }
 
 export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +289,15 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  roommatePreference?: Prisma.XOR<Prisma.RoommatePreferenceNullableScalarRelationFilter, Prisma.RoommatePreferenceWhereInput> | null
+  viewingRequests?: Prisma.ViewingRequestListRelationFilter
+  applications?: Prisma.ApplicationListRelationFilter
+  roomOccupancies?: Prisma.RoomOccupantListRelationFilter
+  leases?: Prisma.LeaseListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
+  utilityBillSplits?: Prisma.UtilityBillSplitListRelationFilter
+  maintenanceRequests?: Prisma.MaintenanceRequestListRelationFilter
 }, "id" | "email" | "userId">
 
 export type TenantOrderByWithAggregationInput = {
@@ -321,7 +348,15 @@ export type TenantCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateInput = {
@@ -337,6 +372,14 @@ export type TenantUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUpdateInput = {
@@ -351,7 +394,15 @@ export type TenantUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateInput = {
@@ -367,6 +418,14 @@ export type TenantUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateManyInput = {
@@ -396,7 +455,6 @@ export type TenantUpdateManyMutationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type TenantUncheckedUpdateManyInput = {
@@ -412,6 +470,11 @@ export type TenantUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type TenantScalarRelationFilter = {
+  is?: Prisma.TenantWhereInput
+  isNot?: Prisma.TenantWhereInput
 }
 
 export type TenantCountOrderByAggregateInput = {
@@ -459,30 +522,1178 @@ export type TenantMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type TenantNullableScalarRelationFilter = {
+  is?: Prisma.TenantWhereInput | null
+  isNot?: Prisma.TenantWhereInput | null
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type TenantCreateNestedOneWithoutApplicationsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutApplicationsInput, Prisma.TenantUncheckedCreateWithoutApplicationsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutApplicationsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutApplicationsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutApplicationsInput, Prisma.TenantUncheckedCreateWithoutApplicationsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutApplicationsInput
+  upsert?: Prisma.TenantUpsertWithoutApplicationsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutApplicationsInput, Prisma.TenantUpdateWithoutApplicationsInput>, Prisma.TenantUncheckedUpdateWithoutApplicationsInput>
+}
+
+export type TenantCreateNestedOneWithoutLeasesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutLeasesInput, Prisma.TenantUncheckedCreateWithoutLeasesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutLeasesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutLeasesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutLeasesInput, Prisma.TenantUncheckedCreateWithoutLeasesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutLeasesInput
+  upsert?: Prisma.TenantUpsertWithoutLeasesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutLeasesInput, Prisma.TenantUpdateWithoutLeasesInput>, Prisma.TenantUncheckedUpdateWithoutLeasesInput>
+}
+
+export type TenantCreateNestedOneWithoutMaintenanceRequestsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutMaintenanceRequestsInput, Prisma.TenantUncheckedCreateWithoutMaintenanceRequestsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMaintenanceRequestsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutMaintenanceRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutMaintenanceRequestsInput, Prisma.TenantUncheckedCreateWithoutMaintenanceRequestsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMaintenanceRequestsInput
+  upsert?: Prisma.TenantUpsertWithoutMaintenanceRequestsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutMaintenanceRequestsInput, Prisma.TenantUpdateWithoutMaintenanceRequestsInput>, Prisma.TenantUncheckedUpdateWithoutMaintenanceRequestsInput>
+}
+
+export type TenantCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutPaymentsInput, Prisma.TenantUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutPaymentsInput, Prisma.TenantUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.TenantUpsertWithoutPaymentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutPaymentsInput, Prisma.TenantUpdateWithoutPaymentsInput>, Prisma.TenantUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type TenantCreateNestedOneWithoutRoomOccupanciesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRoomOccupanciesInput, Prisma.TenantUncheckedCreateWithoutRoomOccupanciesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoomOccupanciesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutRoomOccupanciesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRoomOccupanciesInput, Prisma.TenantUncheckedCreateWithoutRoomOccupanciesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoomOccupanciesInput
+  upsert?: Prisma.TenantUpsertWithoutRoomOccupanciesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRoomOccupanciesInput, Prisma.TenantUpdateWithoutRoomOccupanciesInput>, Prisma.TenantUncheckedUpdateWithoutRoomOccupanciesInput>
+}
+
+export type TenantCreateNestedOneWithoutRoommatePreferenceInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRoommatePreferenceInput, Prisma.TenantUncheckedCreateWithoutRoommatePreferenceInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoommatePreferenceInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutRoommatePreferenceNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRoommatePreferenceInput, Prisma.TenantUncheckedCreateWithoutRoommatePreferenceInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoommatePreferenceInput
+  upsert?: Prisma.TenantUpsertWithoutRoommatePreferenceInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRoommatePreferenceInput, Prisma.TenantUpdateWithoutRoommatePreferenceInput>, Prisma.TenantUncheckedUpdateWithoutRoommatePreferenceInput>
 }
 
 export type NullableEnumGenderFieldUpdateOperationsInput = {
   set?: $Enums.Gender | null
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type TenantCreateNestedOneWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutUserInput, Prisma.TenantUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutUserInput
+  connect?: Prisma.TenantWhereUniqueInput
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type TenantUncheckedCreateNestedOneWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutUserInput, Prisma.TenantUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutUserInput
+  connect?: Prisma.TenantWhereUniqueInput
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type TenantUpdateOneWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutUserInput, Prisma.TenantUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutUserInput
+  upsert?: Prisma.TenantUpsertWithoutUserInput
+  disconnect?: Prisma.TenantWhereInput | boolean
+  delete?: Prisma.TenantWhereInput | boolean
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutUserInput, Prisma.TenantUpdateWithoutUserInput>, Prisma.TenantUncheckedUpdateWithoutUserInput>
 }
 
+export type TenantUncheckedUpdateOneWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutUserInput, Prisma.TenantUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutUserInput
+  upsert?: Prisma.TenantUpsertWithoutUserInput
+  disconnect?: Prisma.TenantWhereInput | boolean
+  delete?: Prisma.TenantWhereInput | boolean
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutUserInput, Prisma.TenantUpdateWithoutUserInput>, Prisma.TenantUncheckedUpdateWithoutUserInput>
+}
+
+export type TenantCreateNestedOneWithoutUtilityBillSplitsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutUtilityBillSplitsInput, Prisma.TenantUncheckedCreateWithoutUtilityBillSplitsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutUtilityBillSplitsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutUtilityBillSplitsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutUtilityBillSplitsInput, Prisma.TenantUncheckedCreateWithoutUtilityBillSplitsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutUtilityBillSplitsInput
+  upsert?: Prisma.TenantUpsertWithoutUtilityBillSplitsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutUtilityBillSplitsInput, Prisma.TenantUpdateWithoutUtilityBillSplitsInput>, Prisma.TenantUncheckedUpdateWithoutUtilityBillSplitsInput>
+}
+
+export type TenantCreateNestedOneWithoutViewingRequestsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutViewingRequestsInput, Prisma.TenantUncheckedCreateWithoutViewingRequestsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutViewingRequestsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutViewingRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutViewingRequestsInput, Prisma.TenantUncheckedCreateWithoutViewingRequestsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutViewingRequestsInput
+  upsert?: Prisma.TenantUpsertWithoutViewingRequestsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutViewingRequestsInput, Prisma.TenantUpdateWithoutViewingRequestsInput>, Prisma.TenantUncheckedUpdateWithoutViewingRequestsInput>
+}
+
+export type TenantCreateWithoutApplicationsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutApplicationsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutApplicationsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutApplicationsInput, Prisma.TenantUncheckedCreateWithoutApplicationsInput>
+}
+
+export type TenantUpsertWithoutApplicationsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutApplicationsInput, Prisma.TenantUncheckedUpdateWithoutApplicationsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutApplicationsInput, Prisma.TenantUncheckedCreateWithoutApplicationsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutApplicationsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutApplicationsInput, Prisma.TenantUncheckedUpdateWithoutApplicationsInput>
+}
+
+export type TenantUpdateWithoutApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutLeasesInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutLeasesInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutLeasesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutLeasesInput, Prisma.TenantUncheckedCreateWithoutLeasesInput>
+}
+
+export type TenantUpsertWithoutLeasesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutLeasesInput, Prisma.TenantUncheckedUpdateWithoutLeasesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutLeasesInput, Prisma.TenantUncheckedCreateWithoutLeasesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutLeasesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutLeasesInput, Prisma.TenantUncheckedUpdateWithoutLeasesInput>
+}
+
+export type TenantUpdateWithoutLeasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutLeasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutMaintenanceRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutMaintenanceRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutMaintenanceRequestsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutMaintenanceRequestsInput, Prisma.TenantUncheckedCreateWithoutMaintenanceRequestsInput>
+}
+
+export type TenantUpsertWithoutMaintenanceRequestsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutMaintenanceRequestsInput, Prisma.TenantUncheckedUpdateWithoutMaintenanceRequestsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutMaintenanceRequestsInput, Prisma.TenantUncheckedCreateWithoutMaintenanceRequestsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutMaintenanceRequestsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutMaintenanceRequestsInput, Prisma.TenantUncheckedUpdateWithoutMaintenanceRequestsInput>
+}
+
+export type TenantUpdateWithoutMaintenanceRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutMaintenanceRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutPaymentsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutPaymentsInput, Prisma.TenantUncheckedCreateWithoutPaymentsInput>
+}
+
+export type TenantUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutPaymentsInput, Prisma.TenantUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutPaymentsInput, Prisma.TenantUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutPaymentsInput, Prisma.TenantUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type TenantUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutRoomOccupanciesInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutRoomOccupanciesInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutRoomOccupanciesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRoomOccupanciesInput, Prisma.TenantUncheckedCreateWithoutRoomOccupanciesInput>
+}
+
+export type TenantUpsertWithoutRoomOccupanciesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutRoomOccupanciesInput, Prisma.TenantUncheckedUpdateWithoutRoomOccupanciesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRoomOccupanciesInput, Prisma.TenantUncheckedCreateWithoutRoomOccupanciesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutRoomOccupanciesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutRoomOccupanciesInput, Prisma.TenantUncheckedUpdateWithoutRoomOccupanciesInput>
+}
+
+export type TenantUpdateWithoutRoomOccupanciesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutRoomOccupanciesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutRoommatePreferenceInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutRoommatePreferenceInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutRoommatePreferenceInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRoommatePreferenceInput, Prisma.TenantUncheckedCreateWithoutRoommatePreferenceInput>
+}
+
+export type TenantUpsertWithoutRoommatePreferenceInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutRoommatePreferenceInput, Prisma.TenantUncheckedUpdateWithoutRoommatePreferenceInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRoommatePreferenceInput, Prisma.TenantUncheckedCreateWithoutRoommatePreferenceInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutRoommatePreferenceInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutRoommatePreferenceInput, Prisma.TenantUncheckedUpdateWithoutRoommatePreferenceInput>
+}
+
+export type TenantUpdateWithoutRoommatePreferenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutRoommatePreferenceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutUserInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutUserInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutUserInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutUserInput, Prisma.TenantUncheckedCreateWithoutUserInput>
+}
+
+export type TenantUpsertWithoutUserInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutUserInput, Prisma.TenantUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutUserInput, Prisma.TenantUncheckedCreateWithoutUserInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutUserInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutUserInput, Prisma.TenantUncheckedUpdateWithoutUserInput>
+}
+
+export type TenantUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutUtilityBillSplitsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutUtilityBillSplitsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutUtilityBillSplitsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutUtilityBillSplitsInput, Prisma.TenantUncheckedCreateWithoutUtilityBillSplitsInput>
+}
+
+export type TenantUpsertWithoutUtilityBillSplitsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutUtilityBillSplitsInput, Prisma.TenantUncheckedUpdateWithoutUtilityBillSplitsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutUtilityBillSplitsInput, Prisma.TenantUncheckedCreateWithoutUtilityBillSplitsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutUtilityBillSplitsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutUtilityBillSplitsInput, Prisma.TenantUncheckedUpdateWithoutUtilityBillSplitsInput>
+}
+
+export type TenantUpdateWithoutUtilityBillSplitsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutUtilityBillSplitsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutViewingRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutTenantInput
+  roommatePreference?: Prisma.RoommatePreferenceCreateNestedOneWithoutTenantInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutViewingRequestsInput = {
+  id?: string
+  name: string
+  email: string
+  contactNumber?: string | null
+  address?: string | null
+  gender?: $Enums.Gender | null
+  nidNumber?: string | null
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedCreateNestedManyWithoutTenantInput
+  leases?: Prisma.LeaseUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedCreateNestedManyWithoutTenantInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutViewingRequestsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutViewingRequestsInput, Prisma.TenantUncheckedCreateWithoutViewingRequestsInput>
+}
+
+export type TenantUpsertWithoutViewingRequestsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutViewingRequestsInput, Prisma.TenantUncheckedUpdateWithoutViewingRequestsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutViewingRequestsInput, Prisma.TenantUncheckedCreateWithoutViewingRequestsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutViewingRequestsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutViewingRequestsInput, Prisma.TenantUncheckedUpdateWithoutViewingRequestsInput>
+}
+
+export type TenantUpdateWithoutViewingRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
+  roommatePreference?: Prisma.RoommatePreferenceUpdateOneWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutViewingRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  nidNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  roommatePreference?: Prisma.RoommatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  roomOccupancies?: Prisma.RoomOccupantUncheckedUpdateManyWithoutTenantNestedInput
+  leases?: Prisma.LeaseUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  utilityBillSplits?: Prisma.UtilityBillSplitUncheckedUpdateManyWithoutTenantNestedInput
+  maintenanceRequests?: Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+
+/**
+ * Count Type TenantCountOutputType
+ */
+
+export type TenantCountOutputType = {
+  viewingRequests: number
+  applications: number
+  roomOccupancies: number
+  leases: number
+  payments: number
+  utilityBillSplits: number
+  maintenanceRequests: number
+}
+
+export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  viewingRequests?: boolean | TenantCountOutputTypeCountViewingRequestsArgs
+  applications?: boolean | TenantCountOutputTypeCountApplicationsArgs
+  roomOccupancies?: boolean | TenantCountOutputTypeCountRoomOccupanciesArgs
+  leases?: boolean | TenantCountOutputTypeCountLeasesArgs
+  payments?: boolean | TenantCountOutputTypeCountPaymentsArgs
+  utilityBillSplits?: boolean | TenantCountOutputTypeCountUtilityBillSplitsArgs
+  maintenanceRequests?: boolean | TenantCountOutputTypeCountMaintenanceRequestsArgs
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TenantCountOutputType
+   */
+  select?: Prisma.TenantCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountViewingRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViewingRequestWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApplicationWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountRoomOccupanciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomOccupantWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountLeasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeaseWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountUtilityBillSplitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UtilityBillSplitWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountMaintenanceRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MaintenanceRequestWhereInput
+}
 
 
 export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -498,6 +1709,16 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  roommatePreference?: boolean | Prisma.Tenant$roommatePreferenceArgs<ExtArgs>
+  viewingRequests?: boolean | Prisma.Tenant$viewingRequestsArgs<ExtArgs>
+  applications?: boolean | Prisma.Tenant$applicationsArgs<ExtArgs>
+  roomOccupancies?: boolean | Prisma.Tenant$roomOccupanciesArgs<ExtArgs>
+  leases?: boolean | Prisma.Tenant$leasesArgs<ExtArgs>
+  payments?: boolean | Prisma.Tenant$paymentsArgs<ExtArgs>
+  utilityBillSplits?: boolean | Prisma.Tenant$utilityBillSplitsArgs<ExtArgs>
+  maintenanceRequests?: boolean | Prisma.Tenant$maintenanceRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenant"]>
 
 export type TenantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -513,6 +1734,7 @@ export type TenantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenant"]>
 
 export type TenantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -528,6 +1750,7 @@ export type TenantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenant"]>
 
 export type TenantSelectScalar = {
@@ -546,10 +1769,38 @@ export type TenantSelectScalar = {
 }
 
 export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "contactNumber" | "address" | "gender" | "nidNumber" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["tenant"]>
+export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  roommatePreference?: boolean | Prisma.Tenant$roommatePreferenceArgs<ExtArgs>
+  viewingRequests?: boolean | Prisma.Tenant$viewingRequestsArgs<ExtArgs>
+  applications?: boolean | Prisma.Tenant$applicationsArgs<ExtArgs>
+  roomOccupancies?: boolean | Prisma.Tenant$roomOccupanciesArgs<ExtArgs>
+  leases?: boolean | Prisma.Tenant$leasesArgs<ExtArgs>
+  payments?: boolean | Prisma.Tenant$paymentsArgs<ExtArgs>
+  utilityBillSplits?: boolean | Prisma.Tenant$utilityBillSplitsArgs<ExtArgs>
+  maintenanceRequests?: boolean | Prisma.Tenant$maintenanceRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type TenantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type TenantIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Tenant"
-  objects: {}
+  objects: {
+    user: Prisma.$UserPayload<ExtArgs>
+    roommatePreference: Prisma.$RoommatePreferencePayload<ExtArgs> | null
+    viewingRequests: Prisma.$ViewingRequestPayload<ExtArgs>[]
+    applications: Prisma.$ApplicationPayload<ExtArgs>[]
+    roomOccupancies: Prisma.$RoomOccupantPayload<ExtArgs>[]
+    leases: Prisma.$LeasePayload<ExtArgs>[]
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
+    utilityBillSplits: Prisma.$UtilityBillSplitPayload<ExtArgs>[]
+    maintenanceRequests: Prisma.$MaintenanceRequestPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
@@ -957,6 +2208,15 @@ readonly fields: TenantFieldRefs;
  */
 export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  roommatePreference<T extends Prisma.Tenant$roommatePreferenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$roommatePreferenceArgs<ExtArgs>>): Prisma.Prisma__RoommatePreferenceClient<runtime.Types.Result.GetResult<Prisma.$RoommatePreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  viewingRequests<T extends Prisma.Tenant$viewingRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$viewingRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViewingRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  applications<T extends Prisma.Tenant$applicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomOccupancies<T extends Prisma.Tenant$roomOccupanciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$roomOccupanciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomOccupantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leases<T extends Prisma.Tenant$leasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$leasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.Tenant$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  utilityBillSplits<T extends Prisma.Tenant$utilityBillSplitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$utilityBillSplitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityBillSplitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  maintenanceRequests<T extends Prisma.Tenant$maintenanceRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$maintenanceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaintenanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1015,6 +2275,10 @@ export type TenantFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  /**
    * Filter, which Tenant to fetch.
    */
   where: Prisma.TenantWhereUniqueInput
@@ -1033,6 +2297,10 @@ export type TenantFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  /**
    * Filter, which Tenant to fetch.
    */
   where: Prisma.TenantWhereUniqueInput
@@ -1050,6 +2318,10 @@ export type TenantFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Tenant
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
   /**
    * Filter, which Tenant to fetch.
    */
@@ -1099,6 +2371,10 @@ export type TenantFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  /**
    * Filter, which Tenant to fetch.
    */
   where?: Prisma.TenantWhereInput
@@ -1146,6 +2422,10 @@ export type TenantFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Tenant
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
   /**
    * Filter, which Tenants to fetch.
    */
@@ -1195,6 +2475,10 @@ export type TenantCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  /**
    * The data needed to create a Tenant.
    */
   data: Prisma.XOR<Prisma.TenantCreateInput, Prisma.TenantUncheckedCreateInput>
@@ -1228,6 +2512,10 @@ export type TenantCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.TenantCreateManyInput | Prisma.TenantCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1242,6 +2530,10 @@ export type TenantUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Tenant
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
   /**
    * The data needed to update a Tenant.
    */
@@ -1294,6 +2586,10 @@ export type TenantUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Tenants to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1308,6 +2604,10 @@ export type TenantUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Tenant
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
   /**
    * The filter to search for the Tenant to update in case it exists.
    */
@@ -1335,6 +2635,10 @@ export type TenantDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  /**
    * Filter which Tenant to delete.
    */
   where: Prisma.TenantWhereUniqueInput
@@ -1355,6 +2659,193 @@ export type TenantDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Tenant.roommatePreference
+ */
+export type Tenant$roommatePreferenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoommatePreference
+   */
+  select?: Prisma.RoommatePreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoommatePreference
+   */
+  omit?: Prisma.RoommatePreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoommatePreferenceInclude<ExtArgs> | null
+  where?: Prisma.RoommatePreferenceWhereInput
+}
+
+/**
+ * Tenant.viewingRequests
+ */
+export type Tenant$viewingRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViewingRequest
+   */
+  select?: Prisma.ViewingRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ViewingRequest
+   */
+  omit?: Prisma.ViewingRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViewingRequestInclude<ExtArgs> | null
+  where?: Prisma.ViewingRequestWhereInput
+  orderBy?: Prisma.ViewingRequestOrderByWithRelationInput | Prisma.ViewingRequestOrderByWithRelationInput[]
+  cursor?: Prisma.ViewingRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViewingRequestScalarFieldEnum | Prisma.ViewingRequestScalarFieldEnum[]
+}
+
+/**
+ * Tenant.applications
+ */
+export type Tenant$applicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Application
+   */
+  select?: Prisma.ApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Application
+   */
+  omit?: Prisma.ApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ApplicationInclude<ExtArgs> | null
+  where?: Prisma.ApplicationWhereInput
+  orderBy?: Prisma.ApplicationOrderByWithRelationInput | Prisma.ApplicationOrderByWithRelationInput[]
+  cursor?: Prisma.ApplicationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ApplicationScalarFieldEnum | Prisma.ApplicationScalarFieldEnum[]
+}
+
+/**
+ * Tenant.roomOccupancies
+ */
+export type Tenant$roomOccupanciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomOccupant
+   */
+  select?: Prisma.RoomOccupantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoomOccupant
+   */
+  omit?: Prisma.RoomOccupantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomOccupantInclude<ExtArgs> | null
+  where?: Prisma.RoomOccupantWhereInput
+  orderBy?: Prisma.RoomOccupantOrderByWithRelationInput | Prisma.RoomOccupantOrderByWithRelationInput[]
+  cursor?: Prisma.RoomOccupantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomOccupantScalarFieldEnum | Prisma.RoomOccupantScalarFieldEnum[]
+}
+
+/**
+ * Tenant.leases
+ */
+export type Tenant$leasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Lease
+   */
+  select?: Prisma.LeaseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Lease
+   */
+  omit?: Prisma.LeaseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeaseInclude<ExtArgs> | null
+  where?: Prisma.LeaseWhereInput
+  orderBy?: Prisma.LeaseOrderByWithRelationInput | Prisma.LeaseOrderByWithRelationInput[]
+  cursor?: Prisma.LeaseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeaseScalarFieldEnum | Prisma.LeaseScalarFieldEnum[]
+}
+
+/**
+ * Tenant.payments
+ */
+export type Tenant$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * Tenant.utilityBillSplits
+ */
+export type Tenant$utilityBillSplitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UtilityBillSplit
+   */
+  select?: Prisma.UtilityBillSplitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UtilityBillSplit
+   */
+  omit?: Prisma.UtilityBillSplitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UtilityBillSplitInclude<ExtArgs> | null
+  where?: Prisma.UtilityBillSplitWhereInput
+  orderBy?: Prisma.UtilityBillSplitOrderByWithRelationInput | Prisma.UtilityBillSplitOrderByWithRelationInput[]
+  cursor?: Prisma.UtilityBillSplitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UtilityBillSplitScalarFieldEnum | Prisma.UtilityBillSplitScalarFieldEnum[]
+}
+
+/**
+ * Tenant.maintenanceRequests
+ */
+export type Tenant$maintenanceRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MaintenanceRequest
+   */
+  select?: Prisma.MaintenanceRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MaintenanceRequest
+   */
+  omit?: Prisma.MaintenanceRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MaintenanceRequestInclude<ExtArgs> | null
+  where?: Prisma.MaintenanceRequestWhereInput
+  orderBy?: Prisma.MaintenanceRequestOrderByWithRelationInput | Prisma.MaintenanceRequestOrderByWithRelationInput[]
+  cursor?: Prisma.MaintenanceRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MaintenanceRequestScalarFieldEnum | Prisma.MaintenanceRequestScalarFieldEnum[]
+}
+
+/**
  * Tenant without action
  */
 export type TenantDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1366,4 +2857,8 @@ export type TenantDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Tenant
    */
   omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
 }

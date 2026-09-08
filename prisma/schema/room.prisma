@@ -1,0 +1,31 @@
+model Room {
+  id            String        @id @default(uuid())
+  roomNumber    String
+  roomType      RoomType      @default(SINGLE)
+  rentAmount    Decimal       @db.Decimal(10, 2)
+  capacity      Int
+  occupantCount Int           @default(0)
+  availableFrom DateTime?
+  status        ListingStatus @default(DRAFT)
+
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  occupants           RoomOccupant[]
+  viewingRequests     ViewingRequest[]
+  applications        Application[]
+  leases              Lease[]
+  utilityBills        UtilityBill[]
+  maintenanceRequests MaintenanceRequest[]
+  documents           Document[]
+
+  @@unique([propertyId, roomNumber], name: "unique_room_number")
+  @@index([status, rentAmount], name: "idx_room_status_rent")
+  @@map("rooms")
+}
