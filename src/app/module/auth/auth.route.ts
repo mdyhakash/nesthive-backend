@@ -27,5 +27,18 @@ router.get(
   auth(Role.ADMIN, Role.MANAGER, Role.OWNER, Role.TENANT),
   authController.getMe,
 );
+router.get("/refresh-token", authController.refreshToken);
+
+router.post(
+  "/forgot-password",
+  validateRequest(authValidation.forgotPasswordZodSchema),
+  authController.forgotPassword,
+);
+
+router.post(
+  "/reset-password",
+  validateRequest(authValidation.resetPasswordZodSchema),
+  authController.resetPassword,
+);
 
 export const authRoutes = router;

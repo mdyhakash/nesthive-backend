@@ -101,9 +101,69 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const refreshToken = catchAsync(async (req: Request, res: Response) => {
+  if (!req.cookies.refreshToken) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "Refresh token is missing");
+  }
+  const result = await authService.refreshToken(req.cookies.refreshToken);
+  const { accessToken, refreshToken: newRefreshToken } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24, // 24 hour or 1 day
+  });
+  res.cookie("refreshToken", newRefreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "New tokens generated successfully",
+    data: {
+      accessToken,
+      refreshToken: newRefreshToken,
+    },
+  });
+});
+
+const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  await authService.forgotPassword(payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `OTP Sent To Email : ${payload.email}`,
+    data: null,
+  });
+});
+
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  await authService.resetPassword(payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Password Changed Successfully",
+    data: null,
+  });
+});
+
 export const authController = {
   registerTenant,
   verifyTenantEmail,
   loginUser,
   getMe,
+  refreshToken,
+  forgotPassword,
+  resetPassword,
 };
