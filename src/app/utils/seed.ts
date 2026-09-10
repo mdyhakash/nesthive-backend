@@ -114,17 +114,28 @@ export const seedOwner = async () => {
       Number(config.bcrypt_salt_rounds),
     );
 
-    const owner = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashPassword,
-        role: Role.OWNER,
-        needPasswordChange: false,
-        emailVerified: true,
-      },
+    await prisma.$transaction(async (tx) => {
+      const ownerUser = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashPassword,
+          role: Role.OWNER,
+          needPasswordChange: false,
+          emailVerified: true,
+        },
+      });
+
+      await tx.owner.create({
+        data: {
+          userId: ownerUser.id,
+          name: ownerUser.name,
+          email: ownerUser.email,
+        },
+      });
+
+      console.log("Owner Created successfully: ", ownerUser.email);
     });
-    console.log("Owner Created : ", owner);
   } catch (error) {
     console.log("Error seeding owner: ", error);
     await prisma.user.delete({
