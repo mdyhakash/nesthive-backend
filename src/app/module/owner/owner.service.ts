@@ -68,7 +68,18 @@ const getMyOwnerProfile = async (userId: string) => {
   return owner;
 };
 
+const getAllOwners = async () => {
+  const owners = await prisma.owner.findMany({
+    where: { isDeleted: false },
+    include: { user: { select: { status: true, emailVerified: true } } },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return owners;
+};
+
 export const ownerService = {
   submitKyc,
   getMyOwnerProfile,
+  getAllOwners,
 };

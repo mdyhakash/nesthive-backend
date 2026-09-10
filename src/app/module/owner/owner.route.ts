@@ -15,4 +15,6 @@ router.post(
 
 router.get("/me", auth(Role.OWNER), ownerController.getMyOwnerProfile);
 
+router.get("/", auth(Role.ADMIN, Role.MANAGER), ownerController.getAllOwners);
+
 export const ownerRoutes = router;

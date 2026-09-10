@@ -36,7 +36,19 @@ const getMyOwnerProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllOwners = catchAsync(async (req: Request, res: Response) => {
+  const result = await ownerService.getAllOwners();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Owners retrieved successfully",
+    data: result,
+  });
+});
+
 export const ownerController = {
   submitKyc,
   getMyOwnerProfile,
+  getAllOwners,
 };
