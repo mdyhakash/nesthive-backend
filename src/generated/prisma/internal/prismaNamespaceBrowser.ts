@@ -51,11 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Admin: 'Admin',
   Application: 'Application',
   AuditLog: 'AuditLog',
   Document: 'Document',
   Lease: 'Lease',
   MaintenanceRequest: 'MaintenanceRequest',
+  Manager: 'Manager',
   Notification: 'Notification',
   Owner: 'Owner',
   Payment: 'Payment',
@@ -84,6 +86,20 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const AdminScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  createdById: 'createdById',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
 export const ApplicationScalarFieldEnum = {
@@ -163,10 +179,25 @@ export const MaintenanceRequestScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   roomId: 'roomId',
-  tenantId: 'tenantId'
+  tenantId: 'tenantId',
+  assignedManagerId: 'assignedManagerId'
 } as const
 
 export type MaintenanceRequestScalarFieldEnum = (typeof MaintenanceRequestScalarFieldEnum)[keyof typeof MaintenanceRequestScalarFieldEnum]
+
+
+export const ManagerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  createdById: 'createdById',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type ManagerScalarFieldEnum = (typeof ManagerScalarFieldEnum)[keyof typeof ManagerScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {

@@ -38,6 +38,7 @@ export type MaintenanceRequestMinAggregateOutputType = {
   updatedAt: Date | null
   roomId: string | null
   tenantId: string | null
+  assignedManagerId: string | null
 }
 
 export type MaintenanceRequestMaxAggregateOutputType = {
@@ -54,6 +55,7 @@ export type MaintenanceRequestMaxAggregateOutputType = {
   updatedAt: Date | null
   roomId: string | null
   tenantId: string | null
+  assignedManagerId: string | null
 }
 
 export type MaintenanceRequestCountAggregateOutputType = {
@@ -70,6 +72,7 @@ export type MaintenanceRequestCountAggregateOutputType = {
   updatedAt: number
   roomId: number
   tenantId: number
+  assignedManagerId: number
   _all: number
 }
 
@@ -88,6 +91,7 @@ export type MaintenanceRequestMinAggregateInputType = {
   updatedAt?: true
   roomId?: true
   tenantId?: true
+  assignedManagerId?: true
 }
 
 export type MaintenanceRequestMaxAggregateInputType = {
@@ -104,6 +108,7 @@ export type MaintenanceRequestMaxAggregateInputType = {
   updatedAt?: true
   roomId?: true
   tenantId?: true
+  assignedManagerId?: true
 }
 
 export type MaintenanceRequestCountAggregateInputType = {
@@ -120,6 +125,7 @@ export type MaintenanceRequestCountAggregateInputType = {
   updatedAt?: true
   roomId?: true
   tenantId?: true
+  assignedManagerId?: true
   _all?: true
 }
 
@@ -209,6 +215,7 @@ export type MaintenanceRequestGroupByOutputType = {
   updatedAt: Date
   roomId: string
   tenantId: string
+  assignedManagerId: string | null
   _count: MaintenanceRequestCountAggregateOutputType | null
   _min: MaintenanceRequestMinAggregateOutputType | null
   _max: MaintenanceRequestMaxAggregateOutputType | null
@@ -246,8 +253,10 @@ export type MaintenanceRequestWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"MaintenanceRequest"> | Date | string
   roomId?: Prisma.StringFilter<"MaintenanceRequest"> | string
   tenantId?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  assignedManagerId?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  assignedManager?: Prisma.XOR<Prisma.ManagerNullableScalarRelationFilter, Prisma.ManagerWhereInput> | null
 }
 
 export type MaintenanceRequestOrderByWithRelationInput = {
@@ -264,8 +273,10 @@ export type MaintenanceRequestOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  assignedManagerId?: Prisma.SortOrderInput | Prisma.SortOrder
   room?: Prisma.RoomOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
+  assignedManager?: Prisma.ManagerOrderByWithRelationInput
 }
 
 export type MaintenanceRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -285,8 +296,10 @@ export type MaintenanceRequestWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"MaintenanceRequest"> | Date | string
   roomId?: Prisma.StringFilter<"MaintenanceRequest"> | string
   tenantId?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  assignedManagerId?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  assignedManager?: Prisma.XOR<Prisma.ManagerNullableScalarRelationFilter, Prisma.ManagerWhereInput> | null
 }, "id">
 
 export type MaintenanceRequestOrderByWithAggregationInput = {
@@ -303,6 +316,7 @@ export type MaintenanceRequestOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  assignedManagerId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MaintenanceRequestCountOrderByAggregateInput
   _max?: Prisma.MaintenanceRequestMaxOrderByAggregateInput
   _min?: Prisma.MaintenanceRequestMinOrderByAggregateInput
@@ -325,6 +339,7 @@ export type MaintenanceRequestScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MaintenanceRequest"> | Date | string
   roomId?: Prisma.StringWithAggregatesFilter<"MaintenanceRequest"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"MaintenanceRequest"> | string
+  assignedManagerId?: Prisma.StringNullableWithAggregatesFilter<"MaintenanceRequest"> | string | null
 }
 
 export type MaintenanceRequestCreateInput = {
@@ -341,6 +356,7 @@ export type MaintenanceRequestCreateInput = {
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutMaintenanceRequestsInput
   tenant: Prisma.TenantCreateNestedOneWithoutMaintenanceRequestsInput
+  assignedManager?: Prisma.ManagerCreateNestedOneWithoutAssignedMaintenanceRequestsInput
 }
 
 export type MaintenanceRequestUncheckedCreateInput = {
@@ -357,6 +373,7 @@ export type MaintenanceRequestUncheckedCreateInput = {
   updatedAt?: Date | string
   roomId: string
   tenantId: string
+  assignedManagerId?: string | null
 }
 
 export type MaintenanceRequestUpdateInput = {
@@ -373,6 +390,7 @@ export type MaintenanceRequestUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutMaintenanceRequestsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMaintenanceRequestsNestedInput
+  assignedManager?: Prisma.ManagerUpdateOneWithoutAssignedMaintenanceRequestsNestedInput
 }
 
 export type MaintenanceRequestUncheckedUpdateInput = {
@@ -389,6 +407,7 @@ export type MaintenanceRequestUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedManagerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MaintenanceRequestCreateManyInput = {
@@ -405,6 +424,7 @@ export type MaintenanceRequestCreateManyInput = {
   updatedAt?: Date | string
   roomId: string
   tenantId: string
+  assignedManagerId?: string | null
 }
 
 export type MaintenanceRequestUpdateManyMutationInput = {
@@ -435,6 +455,7 @@ export type MaintenanceRequestUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomId?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedManagerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MaintenanceRequestCountOrderByAggregateInput = {
@@ -451,6 +472,7 @@ export type MaintenanceRequestCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  assignedManagerId?: Prisma.SortOrder
 }
 
 export type MaintenanceRequestMaxOrderByAggregateInput = {
@@ -467,6 +489,7 @@ export type MaintenanceRequestMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  assignedManagerId?: Prisma.SortOrder
 }
 
 export type MaintenanceRequestMinOrderByAggregateInput = {
@@ -483,6 +506,7 @@ export type MaintenanceRequestMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  assignedManagerId?: Prisma.SortOrder
 }
 
 export type MaintenanceRequestListRelationFilter = {
@@ -501,6 +525,48 @@ export type EnumMaintenancePriorityFieldUpdateOperationsInput = {
 
 export type EnumMaintenanceStatusFieldUpdateOperationsInput = {
   set?: $Enums.MaintenanceStatus
+}
+
+export type MaintenanceRequestCreateNestedManyWithoutAssignedManagerInput = {
+  create?: Prisma.XOR<Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput> | Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput[] | Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput[]
+  connectOrCreate?: Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput | Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput[]
+  createMany?: Prisma.MaintenanceRequestCreateManyAssignedManagerInputEnvelope
+  connect?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+}
+
+export type MaintenanceRequestUncheckedCreateNestedManyWithoutAssignedManagerInput = {
+  create?: Prisma.XOR<Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput> | Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput[] | Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput[]
+  connectOrCreate?: Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput | Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput[]
+  createMany?: Prisma.MaintenanceRequestCreateManyAssignedManagerInputEnvelope
+  connect?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+}
+
+export type MaintenanceRequestUpdateManyWithoutAssignedManagerNestedInput = {
+  create?: Prisma.XOR<Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput> | Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput[] | Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput[]
+  connectOrCreate?: Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput | Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput[]
+  upsert?: Prisma.MaintenanceRequestUpsertWithWhereUniqueWithoutAssignedManagerInput | Prisma.MaintenanceRequestUpsertWithWhereUniqueWithoutAssignedManagerInput[]
+  createMany?: Prisma.MaintenanceRequestCreateManyAssignedManagerInputEnvelope
+  set?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  disconnect?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  delete?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  connect?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  update?: Prisma.MaintenanceRequestUpdateWithWhereUniqueWithoutAssignedManagerInput | Prisma.MaintenanceRequestUpdateWithWhereUniqueWithoutAssignedManagerInput[]
+  updateMany?: Prisma.MaintenanceRequestUpdateManyWithWhereWithoutAssignedManagerInput | Prisma.MaintenanceRequestUpdateManyWithWhereWithoutAssignedManagerInput[]
+  deleteMany?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
+}
+
+export type MaintenanceRequestUncheckedUpdateManyWithoutAssignedManagerNestedInput = {
+  create?: Prisma.XOR<Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput> | Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput[] | Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput[]
+  connectOrCreate?: Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput | Prisma.MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput[]
+  upsert?: Prisma.MaintenanceRequestUpsertWithWhereUniqueWithoutAssignedManagerInput | Prisma.MaintenanceRequestUpsertWithWhereUniqueWithoutAssignedManagerInput[]
+  createMany?: Prisma.MaintenanceRequestCreateManyAssignedManagerInputEnvelope
+  set?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  disconnect?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  delete?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  connect?: Prisma.MaintenanceRequestWhereUniqueInput | Prisma.MaintenanceRequestWhereUniqueInput[]
+  update?: Prisma.MaintenanceRequestUpdateWithWhereUniqueWithoutAssignedManagerInput | Prisma.MaintenanceRequestUpdateWithWhereUniqueWithoutAssignedManagerInput[]
+  updateMany?: Prisma.MaintenanceRequestUpdateManyWithWhereWithoutAssignedManagerInput | Prisma.MaintenanceRequestUpdateManyWithWhereWithoutAssignedManagerInput[]
+  deleteMany?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
 }
 
 export type MaintenanceRequestCreateNestedManyWithoutRoomInput = {
@@ -587,6 +653,84 @@ export type MaintenanceRequestUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
 }
 
+export type MaintenanceRequestCreateWithoutAssignedManagerInput = {
+  id?: string
+  title: string
+  description: string
+  priority?: $Enums.MaintenancePriority
+  status?: $Enums.MaintenanceStatus
+  assignedTo?: string | null
+  resolutionNote?: string | null
+  imageUrl?: string | null
+  imagePublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  room: Prisma.RoomCreateNestedOneWithoutMaintenanceRequestsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutMaintenanceRequestsInput
+}
+
+export type MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput = {
+  id?: string
+  title: string
+  description: string
+  priority?: $Enums.MaintenancePriority
+  status?: $Enums.MaintenanceStatus
+  assignedTo?: string | null
+  resolutionNote?: string | null
+  imageUrl?: string | null
+  imagePublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomId: string
+  tenantId: string
+}
+
+export type MaintenanceRequestCreateOrConnectWithoutAssignedManagerInput = {
+  where: Prisma.MaintenanceRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput>
+}
+
+export type MaintenanceRequestCreateManyAssignedManagerInputEnvelope = {
+  data: Prisma.MaintenanceRequestCreateManyAssignedManagerInput | Prisma.MaintenanceRequestCreateManyAssignedManagerInput[]
+  skipDuplicates?: boolean
+}
+
+export type MaintenanceRequestUpsertWithWhereUniqueWithoutAssignedManagerInput = {
+  where: Prisma.MaintenanceRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.MaintenanceRequestUpdateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedUpdateWithoutAssignedManagerInput>
+  create: Prisma.XOR<Prisma.MaintenanceRequestCreateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedCreateWithoutAssignedManagerInput>
+}
+
+export type MaintenanceRequestUpdateWithWhereUniqueWithoutAssignedManagerInput = {
+  where: Prisma.MaintenanceRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.MaintenanceRequestUpdateWithoutAssignedManagerInput, Prisma.MaintenanceRequestUncheckedUpdateWithoutAssignedManagerInput>
+}
+
+export type MaintenanceRequestUpdateManyWithWhereWithoutAssignedManagerInput = {
+  where: Prisma.MaintenanceRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.MaintenanceRequestUpdateManyMutationInput, Prisma.MaintenanceRequestUncheckedUpdateManyWithoutAssignedManagerInput>
+}
+
+export type MaintenanceRequestScalarWhereInput = {
+  AND?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
+  OR?: Prisma.MaintenanceRequestScalarWhereInput[]
+  NOT?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
+  id?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  title?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  description?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  priority?: Prisma.EnumMaintenancePriorityFilter<"MaintenanceRequest"> | $Enums.MaintenancePriority
+  status?: Prisma.EnumMaintenanceStatusFilter<"MaintenanceRequest"> | $Enums.MaintenanceStatus
+  assignedTo?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
+  resolutionNote?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
+  imageUrl?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
+  imagePublicId?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"MaintenanceRequest"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MaintenanceRequest"> | Date | string
+  roomId?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  tenantId?: Prisma.StringFilter<"MaintenanceRequest"> | string
+  assignedManagerId?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
+}
+
 export type MaintenanceRequestCreateWithoutRoomInput = {
   id?: string
   title: string
@@ -600,6 +744,7 @@ export type MaintenanceRequestCreateWithoutRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutMaintenanceRequestsInput
+  assignedManager?: Prisma.ManagerCreateNestedOneWithoutAssignedMaintenanceRequestsInput
 }
 
 export type MaintenanceRequestUncheckedCreateWithoutRoomInput = {
@@ -615,6 +760,7 @@ export type MaintenanceRequestUncheckedCreateWithoutRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
+  assignedManagerId?: string | null
 }
 
 export type MaintenanceRequestCreateOrConnectWithoutRoomInput = {
@@ -643,25 +789,6 @@ export type MaintenanceRequestUpdateManyWithWhereWithoutRoomInput = {
   data: Prisma.XOR<Prisma.MaintenanceRequestUpdateManyMutationInput, Prisma.MaintenanceRequestUncheckedUpdateManyWithoutRoomInput>
 }
 
-export type MaintenanceRequestScalarWhereInput = {
-  AND?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
-  OR?: Prisma.MaintenanceRequestScalarWhereInput[]
-  NOT?: Prisma.MaintenanceRequestScalarWhereInput | Prisma.MaintenanceRequestScalarWhereInput[]
-  id?: Prisma.StringFilter<"MaintenanceRequest"> | string
-  title?: Prisma.StringFilter<"MaintenanceRequest"> | string
-  description?: Prisma.StringFilter<"MaintenanceRequest"> | string
-  priority?: Prisma.EnumMaintenancePriorityFilter<"MaintenanceRequest"> | $Enums.MaintenancePriority
-  status?: Prisma.EnumMaintenanceStatusFilter<"MaintenanceRequest"> | $Enums.MaintenanceStatus
-  assignedTo?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
-  resolutionNote?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
-  imageUrl?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
-  imagePublicId?: Prisma.StringNullableFilter<"MaintenanceRequest"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"MaintenanceRequest"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"MaintenanceRequest"> | Date | string
-  roomId?: Prisma.StringFilter<"MaintenanceRequest"> | string
-  tenantId?: Prisma.StringFilter<"MaintenanceRequest"> | string
-}
-
 export type MaintenanceRequestCreateWithoutTenantInput = {
   id?: string
   title: string
@@ -675,6 +802,7 @@ export type MaintenanceRequestCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutMaintenanceRequestsInput
+  assignedManager?: Prisma.ManagerCreateNestedOneWithoutAssignedMaintenanceRequestsInput
 }
 
 export type MaintenanceRequestUncheckedCreateWithoutTenantInput = {
@@ -690,6 +818,7 @@ export type MaintenanceRequestUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomId: string
+  assignedManagerId?: string | null
 }
 
 export type MaintenanceRequestCreateOrConnectWithoutTenantInput = {
@@ -718,6 +847,70 @@ export type MaintenanceRequestUpdateManyWithWhereWithoutTenantInput = {
   data: Prisma.XOR<Prisma.MaintenanceRequestUpdateManyMutationInput, Prisma.MaintenanceRequestUncheckedUpdateManyWithoutTenantInput>
 }
 
+export type MaintenanceRequestCreateManyAssignedManagerInput = {
+  id?: string
+  title: string
+  description: string
+  priority?: $Enums.MaintenancePriority
+  status?: $Enums.MaintenanceStatus
+  assignedTo?: string | null
+  resolutionNote?: string | null
+  imageUrl?: string | null
+  imagePublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomId: string
+  tenantId: string
+}
+
+export type MaintenanceRequestUpdateWithoutAssignedManagerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+  status?: Prisma.EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  room?: Prisma.RoomUpdateOneRequiredWithoutMaintenanceRequestsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutMaintenanceRequestsNestedInput
+}
+
+export type MaintenanceRequestUncheckedUpdateWithoutAssignedManagerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+  status?: Prisma.EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type MaintenanceRequestUncheckedUpdateManyWithoutAssignedManagerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+  status?: Prisma.EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type MaintenanceRequestCreateManyRoomInput = {
   id?: string
   title: string
@@ -731,6 +924,7 @@ export type MaintenanceRequestCreateManyRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
+  assignedManagerId?: string | null
 }
 
 export type MaintenanceRequestUpdateWithoutRoomInput = {
@@ -746,6 +940,7 @@ export type MaintenanceRequestUpdateWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutMaintenanceRequestsNestedInput
+  assignedManager?: Prisma.ManagerUpdateOneWithoutAssignedMaintenanceRequestsNestedInput
 }
 
 export type MaintenanceRequestUncheckedUpdateWithoutRoomInput = {
@@ -761,6 +956,7 @@ export type MaintenanceRequestUncheckedUpdateWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedManagerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MaintenanceRequestUncheckedUpdateManyWithoutRoomInput = {
@@ -776,6 +972,7 @@ export type MaintenanceRequestUncheckedUpdateManyWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedManagerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MaintenanceRequestCreateManyTenantInput = {
@@ -791,6 +988,7 @@ export type MaintenanceRequestCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomId: string
+  assignedManagerId?: string | null
 }
 
 export type MaintenanceRequestUpdateWithoutTenantInput = {
@@ -806,6 +1004,7 @@ export type MaintenanceRequestUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutMaintenanceRequestsNestedInput
+  assignedManager?: Prisma.ManagerUpdateOneWithoutAssignedMaintenanceRequestsNestedInput
 }
 
 export type MaintenanceRequestUncheckedUpdateWithoutTenantInput = {
@@ -821,6 +1020,7 @@ export type MaintenanceRequestUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedManagerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MaintenanceRequestUncheckedUpdateManyWithoutTenantInput = {
@@ -836,6 +1036,7 @@ export type MaintenanceRequestUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignedManagerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -854,8 +1055,10 @@ export type MaintenanceRequestSelect<ExtArgs extends runtime.Types.Extensions.In
   updatedAt?: boolean
   roomId?: boolean
   tenantId?: boolean
+  assignedManagerId?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignedManager?: boolean | Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>
 }, ExtArgs["result"]["maintenanceRequest"]>
 
 export type MaintenanceRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -872,8 +1075,10 @@ export type MaintenanceRequestSelectCreateManyAndReturn<ExtArgs extends runtime.
   updatedAt?: boolean
   roomId?: boolean
   tenantId?: boolean
+  assignedManagerId?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignedManager?: boolean | Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>
 }, ExtArgs["result"]["maintenanceRequest"]>
 
 export type MaintenanceRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -890,8 +1095,10 @@ export type MaintenanceRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.
   updatedAt?: boolean
   roomId?: boolean
   tenantId?: boolean
+  assignedManagerId?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignedManager?: boolean | Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>
 }, ExtArgs["result"]["maintenanceRequest"]>
 
 export type MaintenanceRequestSelectScalar = {
@@ -908,20 +1115,24 @@ export type MaintenanceRequestSelectScalar = {
   updatedAt?: boolean
   roomId?: boolean
   tenantId?: boolean
+  assignedManagerId?: boolean
 }
 
-export type MaintenanceRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "priority" | "status" | "assignedTo" | "resolutionNote" | "imageUrl" | "imagePublicId" | "createdAt" | "updatedAt" | "roomId" | "tenantId", ExtArgs["result"]["maintenanceRequest"]>
+export type MaintenanceRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "priority" | "status" | "assignedTo" | "resolutionNote" | "imageUrl" | "imagePublicId" | "createdAt" | "updatedAt" | "roomId" | "tenantId" | "assignedManagerId", ExtArgs["result"]["maintenanceRequest"]>
 export type MaintenanceRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignedManager?: boolean | Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>
 }
 export type MaintenanceRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignedManager?: boolean | Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>
 }
 export type MaintenanceRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  assignedManager?: boolean | Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>
 }
 
 export type $MaintenanceRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -929,6 +1140,7 @@ export type $MaintenanceRequestPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     room: Prisma.$RoomPayload<ExtArgs>
     tenant: Prisma.$TenantPayload<ExtArgs>
+    assignedManager: Prisma.$ManagerPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -944,6 +1156,7 @@ export type $MaintenanceRequestPayload<ExtArgs extends runtime.Types.Extensions.
     updatedAt: Date
     roomId: string
     tenantId: string
+    assignedManagerId: string | null
   }, ExtArgs["result"]["maintenanceRequest"]>
   composites: {}
 }
@@ -1340,6 +1553,7 @@ export interface Prisma__MaintenanceRequestClient<T, Null = never, ExtArgs exten
   readonly [Symbol.toStringTag]: "PrismaPromise"
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  assignedManager<T extends Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MaintenanceRequest$assignedManagerArgs<ExtArgs>>): Prisma.Prisma__ManagerClient<runtime.Types.Result.GetResult<Prisma.$ManagerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1382,6 +1596,7 @@ export interface MaintenanceRequestFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"MaintenanceRequest", 'DateTime'>
   readonly roomId: Prisma.FieldRef<"MaintenanceRequest", 'String'>
   readonly tenantId: Prisma.FieldRef<"MaintenanceRequest", 'String'>
+  readonly assignedManagerId: Prisma.FieldRef<"MaintenanceRequest", 'String'>
 }
     
 
@@ -1780,6 +1995,25 @@ export type MaintenanceRequestDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many MaintenanceRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * MaintenanceRequest.assignedManager
+ */
+export type MaintenanceRequest$assignedManagerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Manager
+   */
+  select?: Prisma.ManagerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Manager
+   */
+  omit?: Prisma.ManagerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ManagerInclude<ExtArgs> | null
+  where?: Prisma.ManagerWhereInput
 }
 
 /**

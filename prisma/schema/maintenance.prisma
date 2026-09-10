@@ -19,6 +19,9 @@ model MaintenanceRequest {
   tenantId String
   tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
+  assignedManagerId String?
+  assignedManager   Manager? @relation(fields: [assignedManagerId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
   @@index([roomId, status], name: "idx_maintenance_room_status")
   @@map("maintenance_requests")
 }

@@ -26,17 +26,28 @@ export const seedAdmin = async () => {
       Number(config.bcrypt_salt_rounds),
     );
 
-    const admin = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashPassword,
-        role: Role.ADMIN,
-        needPasswordChange: false,
-        emailVerified: true,
-      },
+    await prisma.$transaction(async (tx) => {
+      const admin = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashPassword,
+          role: Role.ADMIN,
+          needPasswordChange: false,
+          emailVerified: true,
+        },
+      });
+
+      await tx.manager.create({
+        data: {
+          userId: admin.id,
+          name: admin.name,
+          email: admin.email,
+        },
+      });
+
+      console.log("Admin Created successfully: ", admin.email);
     });
-    console.log("Admin Created : ", admin);
   } catch (error) {
     console.log("Error seeding admin: ", error);
     await prisma.user.delete({
@@ -70,17 +81,28 @@ export const seedManager = async () => {
       Number(config.bcrypt_salt_rounds),
     );
 
-    const manager = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashPassword,
-        role: Role.MANAGER,
-        needPasswordChange: false,
-        emailVerified: true,
-      },
+    await prisma.$transaction(async (tx) => {
+      const manager = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashPassword,
+          role: Role.MANAGER,
+          needPasswordChange: false,
+          emailVerified: true,
+        },
+      });
+
+      await tx.manager.create({
+        data: {
+          userId: manager.id,
+          name: manager.name,
+          email: manager.email,
+        },
+      });
+
+      console.log("Manager Created successfully: ", manager.email);
     });
-    console.log("Manager Created : ", manager);
   } catch (error) {
     console.log("Error seeding manager: ", error);
     await prisma.user.delete({

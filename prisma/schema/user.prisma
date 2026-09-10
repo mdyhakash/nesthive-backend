@@ -18,6 +18,8 @@ model User {
 
   tenant Tenant?
   owner  Owner?
+  manager Manager?
+  admin Admin?
 
   notifications Notification[]
   auditLogs     AuditLog[]
