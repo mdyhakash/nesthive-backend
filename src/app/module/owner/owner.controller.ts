@@ -5,6 +5,83 @@ import { ownerService } from "./owner.service";
 import { AppError } from "../../utils/AppError";
 import { sendResponse } from "../../utils/sendResponse";
 
+const registerOwner = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  await ownerService.registerOwner(payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Verification OTP Sent",
+    data: null,
+  });
+});
+
+const verifyOwnerEmail = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const result = await ownerService.verifyOwnerEmail(payload);
+
+  const { accessToken, refreshToken, user, owner } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24,
+  });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Email Verified Successfully",
+    data: {
+      accessToken,
+      refreshToken,
+      user,
+      owner,
+    },
+  });
+});
+
+const loginUser = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const result = await ownerService.loginOwner(payload);
+
+  const { accessToken, refreshToken } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24,
+  });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Owner logged in successfully",
+    data: {
+      accessToken,
+      refreshToken,
+    },
+  });
+});
+
 const submitKyc = catchAsync(async (req: Request, res: Response) => {
   if (!req.file) {
     throw new AppError(httpStatus.BAD_REQUEST, "No File Provided.");
@@ -48,6 +125,9 @@ const getAllOwners = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const ownerController = {
+  registerOwner,
+  verifyOwnerEmail,
+  loginUser,
   submitKyc,
   getMyOwnerProfile,
   getAllOwners,

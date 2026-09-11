@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Nest Hive</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 40px 16px;
+        background-color: #f4f7fb;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f2937;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      .header {
+        background-color: #111827;
+        padding: 25px;
+        text-align: center;
+      }
+
+      .logo {
+        color: #ffffff;
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      .logo span {
+        color: #6366f1;
+      }
+
+      .content {
+        padding: 40px 32px;
+      }
+
+      .title {
+        font-size: 24px;
+        color: #111827;
+        margin-bottom: 20px;
+      }
+
+      .message {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #6b7280;
+        margin-bottom: 20px;
+      }
+
+      .greeting {
+        font-size: 16px;
+        color: #374151;
+        margin-bottom: 15px;
+      }
+
+      .next-step {
+        background-color: #eef2ff;
+        border-left: 4px solid #6366f1;
+        padding: 16px 18px;
+        margin: 25px 0;
+        border-radius: 6px;
+      }
+
+      .next-step-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 6px;
+      }
+
+      .next-step-text {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #6b7280;
+      }
+
+      .footer {
+        border-top: 1px solid #eeeeee;
+        background-color: #fafafa;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .footer p {
+        margin: 0;
+        color: #9ca3af;
+        font-size: 12px;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        .content {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">Nest<span>Hive</span></div>
+      </div>
+
+      <div class="content">
+        <p class="greeting">Hi <strong><%= name %></strong>,</p>
+
+        <h1 class="title">Welcome to Nest Hive! 🎉</h1>
+
+        <p class="message">
+          Your email address has been successfully verified, and your owner
+          account is now ready to use.
+        </p>
+
+        <p class="message">
+          You can now log in to your Nest Hive account. To continue with the
+          owner onboarding process and access the full dashboard features, you
+          need to submit your KYC details for verification.
+        </p>
+
+        <div class="next-step">
+          <div class="next-step-title">What's next?</div>
+
+          <div class="next-step-text">
+            Log in to your account and submit the required KYC information. Once
+            your KYC is reviewed and approved, you will be able to access the
+            owner dashboard features and continue with your activities on Nest
+            Hive.
+          </div>
+        </div>
+
+        <p class="message">
+          Thank you for choosing Nest Hive. We look forward to having you as
+          part of our owner community.
+        </p>
+
+        <p class="message">Welcome aboard!</p>
+      </div>
+
+      <div class="footer">
+        <p>© <%= new Date().getFullYear() %> Nest Hive. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>

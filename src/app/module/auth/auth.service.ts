@@ -36,7 +36,10 @@ const registerTenant = async (payload: IRegisterTenantPayload) => {
     );
   }
 
-  const hashedPassword = await bcrypt.hash(password, 8);
+  const hashedPassword = await bcrypt.hash(
+    password,
+    Number(config.bcrypt_salt_rounds),
+  );
 
   const expirationSeconds = 5 * 60;
 

@@ -3,8 +3,27 @@ import { auth } from "../../middleware/checkAuth";
 import { Role } from "../../../generated/prisma/enums";
 import { upload } from "../../lib/multer";
 import { ownerController } from "./owner.controller";
+import { validateRequest } from "../../middleware/validateRequest";
+import { ownerValidation } from "./owner.validation";
 
 const router = Router();
+
+router.post(
+  "/register",
+  validateRequest(ownerValidation.registerOwnerZodSchema),
+  ownerController.registerOwner,
+);
+router.post(
+  "/verify-email",
+  validateRequest(ownerValidation.ownerEmailVerifyZodSchema),
+  ownerController.verifyOwnerEmail,
+);
+
+router.post(
+  "/login",
+  validateRequest(ownerValidation.loginZodSchema),
+  ownerController.loginUser,
+);
 
 router.post(
   "/kyc",
