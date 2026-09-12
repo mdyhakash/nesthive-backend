@@ -83,18 +83,25 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const submitKyc = catchAsync(async (req: Request, res: Response) => {
-  if (!req.file) {
-    throw new AppError(httpStatus.BAD_REQUEST, "No File Provided.");
+  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+  const kycDocument = files?.["kycDocument"] ? files["kycDocument"][0] : null;
+  const additionalFiles = files?.["additionalFiles"] || [];
+
+  if (!kycDocument) {
+    throw new AppError(httpStatus.BAD_REQUEST, "KYC Document Is Required");
   }
 
-  const userId = req.user?.userId as string;
-
-  const result = await ownerService.submitKyc(userId, req.file.buffer);
+  const result = await ownerService.submitKyc(
+    req.user!.userId,
+    kycDocument.buffer,
+    additionalFiles.map((file) => file.buffer),
+  );
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "KYC document submitted. Awaiting admin review.",
+    message: "KYC Submitted Successfully. Awaiting admin review.",
     data: result,
   });
 });

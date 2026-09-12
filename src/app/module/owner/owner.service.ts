@@ -6,7 +6,12 @@ import { cloudinary } from "../../lib/cloudinary";
 import { AppError } from "../../utils/AppError";
 import bcrypt from "bcryptjs";
 import config from "../../config";
-import { Role, UserStatus } from "../../../generated/prisma/enums";
+import {
+  DocumentType,
+  OwnerVerificationStatus,
+  Role,
+  UserStatus,
+} from "../../../generated/prisma/enums";
 import { redisClient } from "../../lib/redis";
 import path from "path";
 import { transporter } from "../../lib/nodemailer";
@@ -248,53 +253,91 @@ const loginOwner = async (payload: ILoginOwnerPayload) => {
   };
 };
 
-const submitKyc = async (userId: string, buffer: Buffer) => {
+const uploadToCloudinary = (buffer: Buffer): Promise<UploadApiResponse> =>
+  new Promise((resolve, reject) => {
+    cloudinary.uploader
+      .upload_stream(
+        { resource_type: "auto", folder: "nesthive/owner-kyc" },
+        (error, result) => {
+          if (error) return reject(error);
+          if (!result) {
+            return reject(
+              new AppError(
+                httpStatus.INTERNAL_SERVER_ERROR,
+                "No Result Returned From Cloudinary",
+              ),
+            );
+          }
+          resolve(result);
+        },
+      )
+      .end(buffer);
+  });
+
+const submitKyc = async (
+  userId: string,
+  kycDocument: Buffer,
+  additionalFiles: Buffer[] = [],
+) => {
   const owner = await prisma.owner.findUnique({ where: { userId } });
 
-  if (!owner)
+  if (!owner) {
     throw new AppError(httpStatus.NOT_FOUND, "Owner profile not found");
+  }
 
-  if (owner.verificationStatus === "APPROVED") {
+  if (owner.verificationStatus === OwnerVerificationStatus.APPROVED) {
     throw new AppError(
       httpStatus.BAD_REQUEST,
       "This account is already verified",
     );
   }
 
-  const cloudinaryResult = await new Promise<UploadApiResponse>(
-    (resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { resource_type: "auto", folder: "nesthive/owner-kyc" },
-          (error, result) => {
-            if (error) return reject(error);
-            if (!result)
-              return reject(new Error("No result returned from Cloudinary"));
-            resolve(result);
-          },
-        )
-        .end(buffer);
-    },
+  if (
+    owner.verificationStatus === OwnerVerificationStatus.PENDING &&
+    owner.kycDocumentUrl
+  ) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Your KYC is already under review",
+    );
+  }
+
+  const kycResult = await uploadToCloudinary(kycDocument);
+
+  const additionalResults = await Promise.all(
+    additionalFiles.map((buffer) => uploadToCloudinary(buffer)),
   );
 
   const result = await prisma.$transaction(async (tx) => {
     const updatedOwner = await tx.owner.update({
       where: { id: owner.id },
       data: {
-        kycDocumentUrl: cloudinaryResult.secure_url,
-        kycDocumentPublicId: cloudinaryResult.public_id,
+        kycDocumentUrl: kycResult.secure_url,
+        kycDocumentPublicId: kycResult.public_id,
+        additionalFiles: additionalResults.map((file) => ({
+          url: file.secure_url,
+          publicId: file.public_id,
+        })),
         verificationStatus: "PENDING",
         rejectionReason: null,
       },
     });
 
-    await tx.document.create({
-      data: {
-        type: "OWNER_KYC",
-        fileUrl: cloudinaryResult.secure_url,
-        publicId: cloudinaryResult.public_id,
-        ownerId: owner.id,
-      },
+    await tx.document.createMany({
+      data: [
+        {
+          type: DocumentType.OWNER_KYC,
+          fileUrl: kycResult.secure_url,
+          publicId: kycResult.public_id,
+          ownerId: owner.id,
+        },
+        ...additionalResults.map((file) => ({
+          type: DocumentType.OWNER_KYC,
+          fileUrl: file.secure_url,
+          publicId: file.public_id,
+          ownerId: owner.id,
+        })),
+      ],
     });
 
     return updatedOwner;

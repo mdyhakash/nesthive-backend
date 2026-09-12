@@ -28,7 +28,10 @@ router.post(
 router.post(
   "/kyc",
   auth(Role.OWNER),
-  upload.single("document"),
+  upload.fields([
+    { name: "kycDocument", maxCount: 1 },
+    { name: "additionalFiles", maxCount: 5 },
+  ]),
   ownerController.submitKyc,
 );
 
