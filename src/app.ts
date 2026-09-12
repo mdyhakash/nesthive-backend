@@ -14,6 +14,7 @@ import { userRoutes } from "./app/module/user/user.route";
 import { ownerRoutes } from "./app/module/owner/owner.route";
 import { propertyRoutes } from "./app/module/property/property.route";
 import { roomRoutes } from "./app/module/room/room.route";
+import { viewingRequestRoutes } from "./app/module/viewingRequest/viewingRequest.route";
 
 const app: Application = express();
 
@@ -36,6 +37,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/owner", ownerRoutes);
 app.use("/api/v1/property", propertyRoutes);
 app.use("/api/v1/room", roomRoutes);
+app.use("/api/v1/viewing-request", viewingRequestRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {
