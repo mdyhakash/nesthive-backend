@@ -1,7 +1,9 @@
 import httpStatus from "http-status";
 import {
   ApplicationStatus,
+  LeaseStatus,
   ListingStatus,
+  OccupancyStatus,
 } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { AppError } from "../../utils/AppError";
@@ -153,15 +155,70 @@ const updateApplicationStatus = async (
     );
   }
 
-  return prisma.application.update({
-    where: { id: applicationId },
-    data: {
-      status: payload.status,
-      rejectionReason:
-        payload.status === "REJECTED" ? payload.rejectionReason : null,
-      paymentDeadline:
-        payload.status === "APPROVED" ? payload.paymentDeadline : null,
-    },
+  if (payload.status === "REJECTED") {
+    return prisma.application.update({
+      where: { id: applicationId },
+      data: {
+        status: ApplicationStatus.REJECTED,
+        rejectionReason: payload.rejectionReason,
+        paymentDeadline: null,
+      },
+    });
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const room = await tx.room.findUniqueOrThrow({
+      where: { id: application.roomId },
+    });
+
+    if (room.occupantCount >= room.capacity) {
+      throw new AppError(
+        httpStatus.CONFLICT,
+        "This room has no remaining capacity",
+      );
+    }
+
+    const updatedApplication = await tx.application.update({
+      where: { id: applicationId },
+      data: {
+        status: ApplicationStatus.APPROVED,
+        paymentDeadline: payload.paymentDeadline,
+      },
+    });
+
+    const lease = await tx.lease.create({
+      data: {
+        applicationId: updatedApplication.id,
+        roomId: application.roomId,
+        tenantId: application.tenantId,
+        ownerId: owner.id,
+        startDate: payload.leaseStartDate ?? new Date(),
+        rentAmount: room.rentAmount,
+        securityDeposit: payload.securityDeposit ?? room.rentAmount,
+        status: LeaseStatus.ACTIVE,
+      },
+    });
+
+    await tx.roomOccupant.create({
+      data: {
+        roomId: application.roomId,
+        tenantId: application.tenantId,
+        moveInDate: lease.startDate,
+        status: OccupancyStatus.ACTIVE,
+      },
+    });
+
+    const newOccupantCount = room.occupantCount + 1;
+
+    await tx.room.update({
+      where: { id: room.id },
+      data: {
+        occupantCount: newOccupantCount,
+        status: newOccupantCount >= room.capacity ? "DRAFT" : room.status,
+      },
+    });
+
+    return lease;
   });
 };
 

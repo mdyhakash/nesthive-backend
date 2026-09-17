@@ -11,6 +11,8 @@ const updateApplicationStatusZodSchema = z.object({
   ),
   rejectionReason: z.string().optional(),
   paymentDeadline: z.coerce.date().optional(),
+  leaseStartDate: z.coerce.date().optional(),
+  securityDeposit: z.number().positive().optional(),
 });
 
 export const applicationValidation = {

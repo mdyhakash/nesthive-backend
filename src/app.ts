@@ -18,6 +18,7 @@ import { viewingRequestRoutes } from "./app/module/viewingRequest/viewingRequest
 import { applicationRoutes } from "./app/module/application/application.route";
 import { tenantRoutes } from "./app/module/tenant/tenant.route";
 import { roommatePreferenceRoutes } from "./app/module/roommatePreference/roommatePreference.route";
+import { leaseRoutes } from "./app/module/lease/lease.route";
 
 const app: Application = express();
 
@@ -42,6 +43,7 @@ app.use("/api/v1/property", propertyRoutes);
 app.use("/api/v1/room", roomRoutes);
 app.use("/api/v1/viewing-request", viewingRequestRoutes);
 app.use("/api/v1/application", applicationRoutes);
+app.use("/api/v1/lease", leaseRoutes);
 app.use("/api/v1/tenant", tenantRoutes);
 app.use("/api/v1/roommate-preference", roommatePreferenceRoutes);
 
