@@ -103,6 +103,7 @@ export const ApplicationStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED',
+  WITHDRAWN: 'WITHDRAWN',
   EXPIRED: 'EXPIRED'
 } as const
 

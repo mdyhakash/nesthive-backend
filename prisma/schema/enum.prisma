@@ -59,6 +59,7 @@ enum ApplicationStatus {
   PENDING
   APPROVED
   REJECTED
+  WITHDRAWN
   EXPIRED
 }
 
