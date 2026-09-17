@@ -16,6 +16,7 @@ import { propertyRoutes } from "./app/module/property/property.route";
 import { roomRoutes } from "./app/module/room/room.route";
 import { viewingRequestRoutes } from "./app/module/viewingRequest/viewingRequest.route";
 import { applicationRoutes } from "./app/module/application/application.route";
+import { tenantRoutes } from "./app/module/tenant/tenant.route";
 
 const app: Application = express();
 
@@ -40,6 +41,7 @@ app.use("/api/v1/property", propertyRoutes);
 app.use("/api/v1/room", roomRoutes);
 app.use("/api/v1/viewing-request", viewingRequestRoutes);
 app.use("/api/v1/application", applicationRoutes);
+app.use("/api/v1/tenant", tenantRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {
