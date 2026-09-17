@@ -17,6 +17,7 @@ import { roomRoutes } from "./app/module/room/room.route";
 import { viewingRequestRoutes } from "./app/module/viewingRequest/viewingRequest.route";
 import { applicationRoutes } from "./app/module/application/application.route";
 import { tenantRoutes } from "./app/module/tenant/tenant.route";
+import { roommatePreferenceRoutes } from "./app/module/roommatePreference/roommatePreference.route";
 
 const app: Application = express();
 
@@ -42,6 +43,7 @@ app.use("/api/v1/room", roomRoutes);
 app.use("/api/v1/viewing-request", viewingRequestRoutes);
 app.use("/api/v1/application", applicationRoutes);
 app.use("/api/v1/tenant", tenantRoutes);
+app.use("/api/v1/roommate-preference", roommatePreferenceRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {
