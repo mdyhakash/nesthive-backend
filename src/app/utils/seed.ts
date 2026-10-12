@@ -38,7 +38,7 @@ export const seedAdmin = async () => {
         },
       });
 
-      await tx.manager.create({
+      await tx.admin.create({
         data: {
           userId: admin.id,
           name: admin.name,
@@ -56,7 +56,7 @@ export const seedAdmin = async () => {
       },
     });
   }
-};
+}
 export const seedManager = async () => {
   try {
     const managerExists = await prisma.user.findFirst({

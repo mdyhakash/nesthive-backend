@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KYC Verification Approved - NestHive</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f4f7fb;
+        color: #1f2937;
+        line-height: 1.6;
+        padding: 40px 16px;
+      }
+      .email-wrapper {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .email-container {
+        background-color: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+      .header {
+        background-color: #111827;
+        padding: 30px 24px;
+        text-align: center;
+      }
+      .logo {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+      .logo span {
+        color: #6366f1;
+      }
+      .hero {
+        padding: 40px 32px 20px;
+        text-align: center;
+      }
+      .badge-icon {
+        width: 68px;
+        height: 68px;
+        margin: 0 auto 20px;
+        background-color: #ecfdf5;
+        color: #10b981;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: bold;
+        border: 2px solid #a7f3d0;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+      }
+      .subtitle {
+        font-size: 15px;
+        color: #6b7280;
+      }
+      .content {
+        padding: 20px 32px 35px;
+      }
+      .greeting {
+        font-size: 16px;
+        color: #374151;
+        margin-bottom: 16px;
+      }
+      .message {
+        font-size: 15px;
+        color: #4b5563;
+        margin-bottom: 24px;
+      }
+      .feature-box {
+        background-color: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 28px;
+      }
+      .feature-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 12px;
+      }
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+      .feature-item {
+        font-size: 14px;
+        color: #4b5563;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+      }
+      .feature-item span {
+        color: #10b981;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+      .btn-wrapper {
+        text-align: center;
+        margin: 30px 0;
+      }
+      .btn {
+        background-color: #6366f1;
+        color: #ffffff !important;
+        text-decoration: none;
+        padding: 14px 32px;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+      .footer {
+        border-top: 1px solid #eeeeee;
+        background-color: #fafafa;
+        padding: 20px;
+        text-align: center;
+      }
+      .footer p {
+        margin: 0;
+        color: #9ca3af;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-wrapper">
+      <div class="email-container">
+        <div class="header">
+          <div class="logo">Nest<span>Hive</span></div>
+        </div>
+        <div class="hero">
+          <div class="badge-icon">&#10003;</div>
+          <h1 class="title">KYC Verification Approved!</h1>
+          <p class="subtitle">Your owner profile is now fully verified and activated.</p>
+        </div>
+        <div class="content">
+          <p class="greeting">Hi <strong><%= name %></strong>,</p>
+          <p class="message">
+            Great news! Our administrative team has reviewed and successfully approved your KYC verification documents. You now have full access to all landlord & owner features on NestHive.
+          </p>
+
+          <div class="feature-box">
+            <div class="feature-title">What you can do now:</div>
+            <ul class="feature-list">
+              <li class="feature-item"><span>&#10003;</span> Publish properties and manage room listings</li>
+              <li class="feature-item"><span>&#10003;</span> Receive and review tenant viewing & booking requests</li>
+              <li class="feature-item"><span>&#10003;</span> Manage active leases and utility bill splits</li>
+              <li class="feature-item"><span>&#10003;</span> Receive secure rent and deposit payments</li>
+            </ul>
+          </div>
+
+          <% if (typeof dashboardUrl !== 'undefined' && dashboardUrl) { %>
+          <div class="btn-wrapper">
+            <a href="<%= dashboardUrl %>" class="btn" target="_blank">Go to Owner Dashboard</a>
+          </div>
+          <% } %>
+
+          <p class="message" style="margin-bottom: 0;">
+            If you have any questions or need assistance, feel free to contact our support team.
+          </p>
+        </div>
+        <div class="footer">
+          <p>&copy; <%= new Date().getFullYear() %> NestHive. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

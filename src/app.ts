@@ -19,6 +19,7 @@ import { applicationRoutes } from "./app/module/application/application.route";
 import { tenantRoutes } from "./app/module/tenant/tenant.route";
 import { roommatePreferenceRoutes } from "./app/module/roommatePreference/roommatePreference.route";
 import { leaseRoutes } from "./app/module/lease/lease.route";
+import { adminRoutes } from "./app/module/admin/admin.route";
 
 const app: Application = express();
 
@@ -46,6 +47,7 @@ app.use("/api/v1/application", applicationRoutes);
 app.use("/api/v1/lease", leaseRoutes);
 app.use("/api/v1/tenant", tenantRoutes);
 app.use("/api/v1/roommate-preference", roommatePreferenceRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {
