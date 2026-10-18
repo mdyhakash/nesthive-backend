@@ -38,6 +38,7 @@ export type UtilityBillSplitMinAggregateOutputType = {
   id: string | null
   shareAmount: runtime.Decimal | null
   status: $Enums.BillSplitStatus | null
+  paidAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   utilityBillId: string | null
@@ -48,6 +49,7 @@ export type UtilityBillSplitMaxAggregateOutputType = {
   id: string | null
   shareAmount: runtime.Decimal | null
   status: $Enums.BillSplitStatus | null
+  paidAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   utilityBillId: string | null
@@ -58,6 +60,7 @@ export type UtilityBillSplitCountAggregateOutputType = {
   id: number
   shareAmount: number
   status: number
+  paidAt: number
   createdAt: number
   updatedAt: number
   utilityBillId: number
@@ -78,6 +81,7 @@ export type UtilityBillSplitMinAggregateInputType = {
   id?: true
   shareAmount?: true
   status?: true
+  paidAt?: true
   createdAt?: true
   updatedAt?: true
   utilityBillId?: true
@@ -88,6 +92,7 @@ export type UtilityBillSplitMaxAggregateInputType = {
   id?: true
   shareAmount?: true
   status?: true
+  paidAt?: true
   createdAt?: true
   updatedAt?: true
   utilityBillId?: true
@@ -98,6 +103,7 @@ export type UtilityBillSplitCountAggregateInputType = {
   id?: true
   shareAmount?: true
   status?: true
+  paidAt?: true
   createdAt?: true
   updatedAt?: true
   utilityBillId?: true
@@ -195,6 +201,7 @@ export type UtilityBillSplitGroupByOutputType = {
   id: string
   shareAmount: runtime.Decimal
   status: $Enums.BillSplitStatus
+  paidAt: Date | null
   createdAt: Date
   updatedAt: Date
   utilityBillId: string
@@ -228,6 +235,7 @@ export type UtilityBillSplitWhereInput = {
   id?: Prisma.StringFilter<"UtilityBillSplit"> | string
   shareAmount?: Prisma.DecimalFilter<"UtilityBillSplit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFilter<"UtilityBillSplit"> | $Enums.BillSplitStatus
+  paidAt?: Prisma.DateTimeNullableFilter<"UtilityBillSplit"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UtilityBillSplit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBillSplit"> | Date | string
   utilityBillId?: Prisma.StringFilter<"UtilityBillSplit"> | string
@@ -241,6 +249,7 @@ export type UtilityBillSplitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   shareAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   utilityBillId?: Prisma.SortOrder
@@ -258,6 +267,7 @@ export type UtilityBillSplitWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UtilityBillSplitWhereInput | Prisma.UtilityBillSplitWhereInput[]
   shareAmount?: Prisma.DecimalFilter<"UtilityBillSplit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFilter<"UtilityBillSplit"> | $Enums.BillSplitStatus
+  paidAt?: Prisma.DateTimeNullableFilter<"UtilityBillSplit"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UtilityBillSplit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBillSplit"> | Date | string
   utilityBillId?: Prisma.StringFilter<"UtilityBillSplit"> | string
@@ -271,6 +281,7 @@ export type UtilityBillSplitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   shareAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   utilityBillId?: Prisma.SortOrder
@@ -289,6 +300,7 @@ export type UtilityBillSplitScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"UtilityBillSplit"> | string
   shareAmount?: Prisma.DecimalWithAggregatesFilter<"UtilityBillSplit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusWithAggregatesFilter<"UtilityBillSplit"> | $Enums.BillSplitStatus
+  paidAt?: Prisma.DateTimeNullableWithAggregatesFilter<"UtilityBillSplit"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UtilityBillSplit"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UtilityBillSplit"> | Date | string
   utilityBillId?: Prisma.StringWithAggregatesFilter<"UtilityBillSplit"> | string
@@ -299,6 +311,7 @@ export type UtilityBillSplitCreateInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBill: Prisma.UtilityBillCreateNestedOneWithoutSplitsInput
@@ -310,6 +323,7 @@ export type UtilityBillSplitUncheckedCreateInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBillId: string
@@ -321,6 +335,7 @@ export type UtilityBillSplitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBill?: Prisma.UtilityBillUpdateOneRequiredWithoutSplitsNestedInput
@@ -332,6 +347,7 @@ export type UtilityBillSplitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBillId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -343,6 +359,7 @@ export type UtilityBillSplitCreateManyInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBillId: string
@@ -353,6 +370,7 @@ export type UtilityBillSplitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -361,6 +379,7 @@ export type UtilityBillSplitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBillId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -391,6 +410,7 @@ export type UtilityBillSplitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   shareAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   utilityBillId?: Prisma.SortOrder
@@ -405,6 +425,7 @@ export type UtilityBillSplitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   shareAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   utilityBillId?: Prisma.SortOrder
@@ -415,6 +436,7 @@ export type UtilityBillSplitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   shareAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paidAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   utilityBillId?: Prisma.SortOrder
@@ -533,6 +555,7 @@ export type UtilityBillSplitCreateWithoutPaymentInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBill: Prisma.UtilityBillCreateNestedOneWithoutSplitsInput
@@ -543,6 +566,7 @@ export type UtilityBillSplitUncheckedCreateWithoutPaymentInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBillId: string
@@ -569,6 +593,7 @@ export type UtilityBillSplitUpdateWithoutPaymentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBill?: Prisma.UtilityBillUpdateOneRequiredWithoutSplitsNestedInput
@@ -579,6 +604,7 @@ export type UtilityBillSplitUncheckedUpdateWithoutPaymentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBillId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -589,6 +615,7 @@ export type UtilityBillSplitCreateWithoutTenantInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBill: Prisma.UtilityBillCreateNestedOneWithoutSplitsInput
@@ -599,6 +626,7 @@ export type UtilityBillSplitUncheckedCreateWithoutTenantInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBillId: string
@@ -638,6 +666,7 @@ export type UtilityBillSplitScalarWhereInput = {
   id?: Prisma.StringFilter<"UtilityBillSplit"> | string
   shareAmount?: Prisma.DecimalFilter<"UtilityBillSplit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFilter<"UtilityBillSplit"> | $Enums.BillSplitStatus
+  paidAt?: Prisma.DateTimeNullableFilter<"UtilityBillSplit"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"UtilityBillSplit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBillSplit"> | Date | string
   utilityBillId?: Prisma.StringFilter<"UtilityBillSplit"> | string
@@ -648,6 +677,7 @@ export type UtilityBillSplitCreateWithoutUtilityBillInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutUtilityBillSplitsInput
@@ -658,6 +688,7 @@ export type UtilityBillSplitUncheckedCreateWithoutUtilityBillInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -694,6 +725,7 @@ export type UtilityBillSplitCreateManyTenantInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   utilityBillId: string
@@ -703,6 +735,7 @@ export type UtilityBillSplitUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBill?: Prisma.UtilityBillUpdateOneRequiredWithoutSplitsNestedInput
@@ -713,6 +746,7 @@ export type UtilityBillSplitUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBillId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -723,6 +757,7 @@ export type UtilityBillSplitUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBillId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -732,6 +767,7 @@ export type UtilityBillSplitCreateManyUtilityBillInput = {
   id?: string
   shareAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.BillSplitStatus
+  paidAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenantId: string
@@ -741,6 +777,7 @@ export type UtilityBillSplitUpdateWithoutUtilityBillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUtilityBillSplitsNestedInput
@@ -751,6 +788,7 @@ export type UtilityBillSplitUncheckedUpdateWithoutUtilityBillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -761,6 +799,7 @@ export type UtilityBillSplitUncheckedUpdateManyWithoutUtilityBillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   shareAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumBillSplitStatusFieldUpdateOperationsInput | $Enums.BillSplitStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -772,6 +811,7 @@ export type UtilityBillSplitSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   shareAmount?: boolean
   status?: boolean
+  paidAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   utilityBillId?: boolean
@@ -785,6 +825,7 @@ export type UtilityBillSplitSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   shareAmount?: boolean
   status?: boolean
+  paidAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   utilityBillId?: boolean
@@ -797,6 +838,7 @@ export type UtilityBillSplitSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   shareAmount?: boolean
   status?: boolean
+  paidAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   utilityBillId?: boolean
@@ -809,13 +851,14 @@ export type UtilityBillSplitSelectScalar = {
   id?: boolean
   shareAmount?: boolean
   status?: boolean
+  paidAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   utilityBillId?: boolean
   tenantId?: boolean
 }
 
-export type UtilityBillSplitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "shareAmount" | "status" | "createdAt" | "updatedAt" | "utilityBillId" | "tenantId", ExtArgs["result"]["utilityBillSplit"]>
+export type UtilityBillSplitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "shareAmount" | "status" | "paidAt" | "createdAt" | "updatedAt" | "utilityBillId" | "tenantId", ExtArgs["result"]["utilityBillSplit"]>
 export type UtilityBillSplitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   utilityBill?: boolean | Prisma.UtilityBillDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
@@ -841,6 +884,7 @@ export type $UtilityBillSplitPayload<ExtArgs extends runtime.Types.Extensions.In
     id: string
     shareAmount: runtime.Decimal
     status: $Enums.BillSplitStatus
+    paidAt: Date | null
     createdAt: Date
     updatedAt: Date
     utilityBillId: string
@@ -1274,6 +1318,7 @@ export interface UtilityBillSplitFieldRefs {
   readonly id: Prisma.FieldRef<"UtilityBillSplit", 'String'>
   readonly shareAmount: Prisma.FieldRef<"UtilityBillSplit", 'Decimal'>
   readonly status: Prisma.FieldRef<"UtilityBillSplit", 'BillSplitStatus'>
+  readonly paidAt: Prisma.FieldRef<"UtilityBillSplit", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"UtilityBillSplit", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UtilityBillSplit", 'DateTime'>
   readonly utilityBillId: Prisma.FieldRef<"UtilityBillSplit", 'String'>

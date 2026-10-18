@@ -2184,6 +2184,7 @@ export const UtilityBillSplitScalarFieldEnum = {
   id: 'id',
   shareAmount: 'shareAmount',
   status: 'status',
+  paidAt: 'paidAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   utilityBillId: 'utilityBillId',
