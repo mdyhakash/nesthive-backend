@@ -22,6 +22,8 @@ import { leaseRoutes } from "./app/module/lease/lease.route";
 import { adminRoutes } from "./app/module/admin/admin.route";
 import { paymentRoutes } from "./app/module/payment/payment.route";
 import { utilityBillRoutes } from "./app/module/utilityBill/utilityBill.route";
+import { maintenanceRoutes } from "./app/module/maintenance/maintenance.route";
+import { notificationRoutes } from "./app/module/notification/notification.route";
 
 const app: Application = express();
 
@@ -52,6 +54,8 @@ app.use("/api/v1/roommate-preference", roommatePreferenceRoutes);
 app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/utility-bill", utilityBillRoutes);
+app.use("/api/v1/maintenance", maintenanceRoutes);
+app.use("/api/v1/notification", notificationRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {
