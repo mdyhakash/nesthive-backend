@@ -24,6 +24,7 @@ import { paymentRoutes } from "./app/module/payment/payment.route";
 import { utilityBillRoutes } from "./app/module/utilityBill/utilityBill.route";
 import { maintenanceRoutes } from "./app/module/maintenance/maintenance.route";
 import { notificationRoutes } from "./app/module/notification/notification.route";
+import { managerRoutes } from "./app/module/manager/manager.route";
 
 const app: Application = express();
 
@@ -56,6 +57,7 @@ app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/utility-bill", utilityBillRoutes);
 app.use("/api/v1/maintenance", maintenanceRoutes);
 app.use("/api/v1/notification", notificationRoutes);
+app.use("/api/v1/manager", managerRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {

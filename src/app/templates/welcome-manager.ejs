@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to NestHive as Manager</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f7fb;
+        color: #1f2937;
+        line-height: 1.6;
+        padding: 40px 16px;
+      }
+      .email-wrapper {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .email-container {
+        background-color: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+      .header {
+        background-color: #111827;
+        padding: 30px 24px;
+        text-align: center;
+      }
+      .logo {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+      .logo span {
+        color: #6366f1;
+      }
+      .hero {
+        padding: 40px 32px 25px;
+        text-align: center;
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 16px;
+        background-color: #e0e7ff;
+        color: #4338ca;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .title {
+        font-size: 26px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+      }
+      .subtitle {
+        font-size: 15px;
+        color: #6b7280;
+        max-width: 460px;
+        margin: 0 auto;
+      }
+      .content {
+        padding: 0 32px 35px;
+      }
+      .greeting {
+        font-size: 16px;
+        color: #374151;
+        margin-bottom: 16px;
+      }
+      .message {
+        font-size: 15px;
+        color: #4b5563;
+        margin-bottom: 24px;
+      }
+      .credentials-card {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 28px;
+      }
+      .card-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #334155;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+      .cred-row {
+        margin-bottom: 12px;
+      }
+      .cred-row:last-child {
+        margin-bottom: 0;
+      }
+      .cred-label {
+        font-size: 12px;
+        color: #64748b;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .cred-value {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0f172a;
+        font-family: monospace;
+        background-color: #ffffff;
+        border: 1px solid #cbd5e1;
+        padding: 8px 12px;
+        border-radius: 6px;
+        display: inline-block;
+        width: 100%;
+        word-break: break-all;
+      }
+      .cta-wrapper {
+        text-align: center;
+        margin: 30px 0 25px;
+      }
+      .cta-btn {
+        display: inline-block;
+        background-color: #4f46e5;
+        color: #ffffff !important;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+      }
+      .alert-box {
+        background-color: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 14px 16px;
+        border-radius: 6px;
+        margin-bottom: 24px;
+      }
+      .alert-text {
+        font-size: 13px;
+        color: #92400e;
+        line-height: 1.5;
+      }
+      .closing {
+        font-size: 14px;
+        color: #6b7280;
+        text-align: center;
+      }
+      .footer {
+        border-top: 1px solid #f1f5f9;
+        padding: 24px 32px;
+        text-align: center;
+        background-color: #fafafa;
+      }
+      .footer-text {
+        color: #94a3b8;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+      .footer-brand {
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-wrapper">
+      <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+          <div class="logo">Nest<span>Hive</span></div>
+        </div>
+
+        <!-- Hero -->
+        <div class="hero">
+          <div class="badge">Team Onboarding</div>
+          <h1 class="title">Welcome to NestHive</h1>
+          <p class="subtitle">
+            You have been assigned as a Property Manager.
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+          <p class="greeting">Hello <strong><%= name %></strong>,</p>
+          <p class="message">
+            An administrator or property owner has added you as a Manager on NestHive. You can now log in to oversee property operations, review viewing requests, and manage maintenance tickets.
+          </p>
+
+          <!-- Credentials -->
+          <div class="credentials-card">
+            <div class="card-title">Your Login Credentials</div>
+            <div class="cred-row">
+              <div class="cred-label">Login Email</div>
+              <div class="cred-value"><%= email %></div>
+            </div>
+            <div class="cred-row">
+              <div class="cred-label">Temporary Password</div>
+              <div class="cred-value"><%= password %></div>
+            </div>
+          </div>
+
+          <!-- Alert -->
+          <div class="alert-box">
+            <p class="alert-text">
+              <strong>Security Recommendation:</strong> For your security, please change your temporary password immediately upon your first login.
+            </p>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="cta-wrapper">
+            <a href="<%= loginUrl %>" class="cta-btn">Log In to NestHive</a>
+          </div>
+
+          <p class="closing">
+            Best regards,<br />
+            <strong>The NestHive Platform Team</strong>
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <p class="footer-text">
+            This is an automated system email. Please do not reply directly to this address.
+          </p>
+          <p class="footer-brand">
+            © <%= new Date().getFullYear() %> NestHive. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
