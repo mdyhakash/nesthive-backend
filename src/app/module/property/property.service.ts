@@ -7,6 +7,7 @@ import {
   ListingStatus,
   OwnerVerificationStatus,
   PropertyType,
+  Role,
 } from "../../../generated/prisma/enums";
 import { IQuery } from "../../../interfaces";
 
@@ -210,6 +211,127 @@ const deleteProperty = async (userId: string, propertyId: string) => {
   });
 };
 
+const assignManager = async (
+  userId: string,
+  userRole: Role,
+  propertyId: string,
+  managerId: string | null,
+) => {
+  const property = await prisma.property.findUnique({
+    where: { id: propertyId, isDeleted: false },
+  });
+
+  if (!property) {
+    throw new AppError(httpStatus.NOT_FOUND, "Property not found");
+  }
+
+  if (userRole === Role.OWNER) {
+    const owner = await getOwnerOrThrow(userId);
+    if (property.ownerId !== owner.id) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        "You do not own this property to assign a manager",
+      );
+    }
+  }
+
+  if (managerId) {
+    const manager = await prisma.manager.findUnique({
+      where: { id: managerId, isDeleted: false },
+    });
+
+    if (!manager) {
+      throw new AppError(httpStatus.NOT_FOUND, "Manager not found or inactive");
+    }
+
+    // Owner can only assign managers they created or admin created
+    if (
+      userRole === Role.OWNER &&
+      manager.createdById &&
+      manager.createdById !== userId
+    ) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        "You can only assign managers that belong to your organization",
+      );
+    }
+  }
+
+  return prisma.property.update({
+    where: { id: propertyId },
+    data: { managerId },
+    include: {
+      manager: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
+};
+
+const getAssignedPropertiesForManager = async (
+  userId: string,
+  query: IQuery,
+) => {
+  const manager = await prisma.manager.findUnique({
+    where: { userId, isDeleted: false },
+  });
+
+  if (!manager) {
+    throw new AppError(httpStatus.NOT_FOUND, "Manager profile not found");
+  }
+
+  const limit = query.limit ? Number(query.limit) : 10;
+  const page = query.page ? Number(query.page) : 1;
+  const skip = (page - 1) * limit;
+
+  const [properties, total] = await Promise.all([
+    prisma.property.findMany({
+      where: { managerId: manager.id, isDeleted: false },
+      take: limit,
+      skip,
+      orderBy: { createdAt: "desc" },
+      include: {
+        rooms: {
+          where: { isDeleted: false },
+          select: {
+            id: true,
+            roomNumber: true,
+            rentAmount: true,
+            capacity: true,
+            occupantCount: true,
+            status: true,
+          },
+        },
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            contactNumber: true,
+          },
+        },
+      },
+    }),
+    prisma.property.count({
+      where: { managerId: manager.id, isDeleted: false },
+    }),
+  ]);
+
+  return {
+    data: properties,
+    meta: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
+
 export const propertyService = {
   createProperty,
   getAllProperties,
@@ -218,4 +340,6 @@ export const propertyService = {
   updateProperty,
   publishProperty,
   deleteProperty,
+  assignManager,
+  getAssignedPropertiesForManager,
 };

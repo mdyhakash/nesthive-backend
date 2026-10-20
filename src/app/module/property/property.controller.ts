@@ -96,6 +96,43 @@ const deleteProperty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const assignManager = catchAsync(async (req: Request, res: Response) => {
+  const propertyId = req.params.id as string;
+  const { managerId } = req.body;
+  const result = await propertyService.assignManager(
+    req.user!.userId,
+    req.user!.role,
+    propertyId,
+    managerId,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: managerId
+      ? "Manager assigned to property successfully"
+      : "Manager removed from property successfully",
+    data: result,
+  });
+});
+
+const getAssignedPropertiesForManager = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await propertyService.getAssignedPropertiesForManager(
+      req.user!.userId,
+      req.query,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Assigned properties retrieved successfully",
+      data: result.data,
+      meta: result.meta,
+    });
+  },
+);
+
 export const propertyController = {
   createProperty,
   getAllProperties,
@@ -104,4 +141,6 @@ export const propertyController = {
   updateProperty,
   publishProperty,
   deleteProperty,
+  assignManager,
+  getAssignedPropertiesForManager,
 };

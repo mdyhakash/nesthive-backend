@@ -18,10 +18,14 @@ model Property {
   ownerId String
   owner   Owner  @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
+  managerId String?
+  manager   Manager? @relation(fields: [managerId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
   rooms     Room[]
   documents Document[]
 
   @@index([city, area], name: "idx_property_location")
   @@index([status], name: "idx_property_status")
+  @@index([managerId], name: "idx_property_manager")
   @@map("properties")
 }

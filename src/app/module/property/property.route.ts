@@ -22,7 +22,20 @@ router.get(
   propertyController.getMyProperties,
 );
 
+router.get(
+  "/assigned/my-properties",
+  auth(Role.MANAGER),
+  propertyController.getAssignedPropertiesForManager,
+);
+
 router.get("/:id", propertyController.getPropertyById);
+
+router.patch(
+  "/:id/assign-manager",
+  auth(Role.OWNER, Role.ADMIN),
+  validateRequest(propertyValidation.assignManagerZodSchema),
+  propertyController.assignManager,
+);
 
 router.patch(
   "/:id",

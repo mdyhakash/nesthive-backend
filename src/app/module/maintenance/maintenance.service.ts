@@ -167,7 +167,9 @@ const getMaintenanceById = async (
       tenant: { select: { id: true, name: true, email: true, userId: true } },
       room: {
         include: {
-          property: { select: { id: true, title: true, ownerId: true } },
+          property: {
+            select: { id: true, title: true, ownerId: true, managerId: true },
+          },
         },
       },
     },
@@ -190,6 +192,22 @@ const getMaintenanceById = async (
       throw new AppError(
         httpStatus.FORBIDDEN,
         "You do not own the property for this request",
+      );
+    }
+  }
+
+  if (userRole === Role.MANAGER) {
+    const manager = await prisma.manager.findUnique({ where: { userId } });
+    if (!manager) {
+      throw new AppError(httpStatus.NOT_FOUND, "Manager profile not found");
+    }
+    if (
+      request.room.property.managerId !== manager.id &&
+      request.assignedManagerId !== manager.id
+    ) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        "You are not assigned to manage this property or maintenance ticket",
       );
     }
   }
@@ -224,6 +242,22 @@ const updateMaintenanceStatus = async (
       throw new AppError(
         httpStatus.FORBIDDEN,
         "You do not own the property for this maintenance ticket",
+      );
+    }
+  }
+
+  if (userRole === Role.MANAGER) {
+    const manager = await prisma.manager.findUnique({ where: { userId } });
+    if (!manager) {
+      throw new AppError(httpStatus.NOT_FOUND, "Manager profile not found");
+    }
+    if (
+      request.room.property.managerId !== manager.id &&
+      request.assignedManagerId !== manager.id
+    ) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        "You are not assigned to manage this property or maintenance ticket",
       );
     }
   }

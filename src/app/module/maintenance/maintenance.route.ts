@@ -39,13 +39,13 @@ router.get(
 
 router.get(
   "/:id",
-  auth(Role.TENANT, Role.OWNER, Role.ADMIN),
+  auth(Role.TENANT, Role.OWNER, Role.ADMIN, Role.MANAGER),
   maintenanceController.getMaintenanceById,
 );
 
 router.patch(
   "/:id/status",
-  auth(Role.OWNER, Role.ADMIN),
+  auth(Role.OWNER, Role.ADMIN, Role.MANAGER),
   validateRequest(maintenanceValidation.updateMaintenanceStatusZodSchema),
   maintenanceController.updateMaintenanceStatus,
 );

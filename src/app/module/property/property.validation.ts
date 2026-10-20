@@ -39,7 +39,12 @@ const updatePropertyZodSchema = z.object({
   amenities: z.array(z.string()).optional(),
 });
 
+const assignManagerZodSchema = z.object({
+  managerId: z.string().nullable(),
+});
+
 export const propertyValidation = {
   createPropertyZodSchema,
   updatePropertyZodSchema,
+  assignManagerZodSchema,
 };

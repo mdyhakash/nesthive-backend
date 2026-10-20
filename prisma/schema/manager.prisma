@@ -12,6 +12,7 @@ model Manager {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   assignedMaintenanceRequests MaintenanceRequest[]
+  managedProperties           Property[]
 
   @@map("managers")
 }
