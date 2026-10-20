@@ -11,6 +11,7 @@ import {
   IRequestUser,
   IResetPasswordPayload,
   IVerifyEmailPayload,
+  IChangePasswordPayload,
 } from "./auth.interface";
 import { Role, UserStatus } from "../../../generated/prisma/enums";
 import path from "path";
@@ -476,6 +477,103 @@ const resetPassword = async (payload: IResetPasswordPayload) => {
   });
 };
 
+const changePassword = async (
+  userId: string,
+  payload: IChangePasswordPayload,
+) => {
+  const { oldPassword, newPassword } = payload;
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  if (user.status === UserStatus.BLOCKED) {
+    throw new AppError(httpStatus.FORBIDDEN, "User is blocked");
+  }
+
+  if (user.isDeleted || user.status === UserStatus.DELETED) {
+    throw new AppError(httpStatus.FORBIDDEN, "User is deleted");
+  }
+
+  if (!user.password) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "User does not have a password set. Try logging in with Google.",
+    );
+  }
+
+  const isPasswordMatched = await bcrypt.compare(oldPassword, user.password);
+
+  if (!isPasswordMatched) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Old password does not match");
+  }
+
+  if (oldPassword === newPassword) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "New password cannot be the same as old password",
+    );
+  }
+
+  const hashedNewPassword = await bcrypt.hash(
+    newPassword,
+    Number(config.bcrypt_salt_rounds),
+  );
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      password: hashedNewPassword,
+      needPasswordChange: false,
+    },
+  });
+
+  const jwtPayload = {
+    userId: updatedUser.id,
+    name: updatedUser.name,
+    email: updatedUser.email,
+    role: updatedUser.role,
+  };
+
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions,
+  );
+
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions,
+  );
+
+  try {
+    const templatePath = path.join(
+      process.cwd(),
+      "src/app/templates/change-password-success.ejs",
+    );
+    const html = await ejs.renderFile(templatePath, { name: user.name });
+
+    await transporter.sendMail({
+      from: config.email_sender,
+      to: user.email,
+      subject: "Security Alert: Password Changed Successfully",
+      html,
+    });
+  } catch (err) {
+    console.warn("Failed to send password change notification email:", err);
+  }
+
+  return {
+    accessToken,
+    refreshToken,
+  };
+};
+
 export const authService = {
   registerTenant,
   verifyTenantEmail,
@@ -484,4 +582,5 @@ export const authService = {
   refreshToken,
   forgotPassword,
   resetPassword,
+  changePassword,
 };

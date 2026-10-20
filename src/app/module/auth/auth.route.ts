@@ -41,4 +41,11 @@ router.post(
   authController.resetPassword,
 );
 
+router.patch(
+  "/change-password",
+  auth(Role.ADMIN, Role.MANAGER, Role.OWNER, Role.TENANT),
+  validateRequest(authValidation.changePasswordZodSchema),
+  authController.changePassword,
+);
+
 export const authRoutes = router;

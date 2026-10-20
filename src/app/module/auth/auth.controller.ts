@@ -158,6 +158,35 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const changePassword = catchAsync(async (req: Request, res: Response) => {
+  const result = await authService.changePassword(req.user!.userId, req.body);
+
+  const { accessToken, refreshToken } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24,
+  });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Password changed successfully",
+    data: {
+      accessToken,
+      refreshToken,
+    },
+  });
+});
+
 export const authController = {
   registerTenant,
   verifyTenantEmail,
@@ -166,4 +195,5 @@ export const authController = {
   refreshToken,
   forgotPassword,
   resetPassword,
+  changePassword,
 };
