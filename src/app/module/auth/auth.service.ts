@@ -12,14 +12,25 @@ import {
   IResetPasswordPayload,
   IVerifyEmailPayload,
   IChangePasswordPayload,
+  IGoogleLoginPayload,
+  ISetPasswordPayload,
 } from "./auth.interface";
-import { Role, UserStatus } from "../../../generated/prisma/enums";
+import {
+  AuthProvider,
+  OwnerVerificationStatus,
+  Role,
+  UserStatus,
+} from "../../../generated/prisma/enums";
 import path from "path";
 import config from "../../config";
 import { jwtUtils } from "../../utils/jwt";
 import { JwtPayload, SignOptions } from "jsonwebtoken";
 import { transporter } from "../../lib/nodemailer";
 import ejs from "ejs";
+import type { TokenPayload } from "google-auth-library";
+import { googleClient } from "../../lib/googleauth";
+
+
 
 const registerTenant = async (payload: IRegisterTenantPayload) => {
   const { name, password, tenant: tenantData } = payload;
@@ -574,13 +585,240 @@ const changePassword = async (
   };
 };
 
+const googleLogin = async (payload: IGoogleLoginPayload) => {
+  let googleIdTokenPayload: TokenPayload | null | undefined = null;
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken: payload.idToken,
+      audience: config.google_client_id,
+    });
+
+    googleIdTokenPayload = ticket.getPayload();
+  } catch (error) {
+    console.log("Google ID Token Verification Failed", error);
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      "Invalid Or Expired Google Id Token",
+    );
+  }
+
+  if (!googleIdTokenPayload) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      "Invalid Or Expired Google Id Token",
+    );
+  }
+
+  if (!googleIdTokenPayload.email) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Google Email Not Found");
+  }
+  if (!googleIdTokenPayload.name) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Google Email User Name Not Found",
+    );
+  }
+
+  const ifUserExistWithGoogleAuth = await prisma.user.findFirst({
+    where: {
+      email: googleIdTokenPayload.email,
+      googleId: googleIdTokenPayload.sub,
+    },
+  });
+
+  let user = ifUserExistWithGoogleAuth;
+
+  if (!ifUserExistWithGoogleAuth) {
+    const ifUserExistWithCredentials = await prisma.user.findFirst({
+      where: {
+        email: googleIdTokenPayload.email,
+        authProvider: AuthProvider.CREDENTIAL,
+      },
+    });
+
+    if (ifUserExistWithCredentials) {
+      if (!ifUserExistWithCredentials.emailVerified) {
+        throw new AppError(httpStatus.FORBIDDEN, "Email Not Verified");
+      }
+
+      if (ifUserExistWithCredentials.status === UserStatus.BLOCKED) {
+        throw new AppError(httpStatus.FORBIDDEN, "User Is Blocked");
+      }
+
+      if (
+        ifUserExistWithCredentials.isDeleted ||
+        ifUserExistWithCredentials.status === UserStatus.DELETED
+      ) {
+        throw new AppError(httpStatus.FORBIDDEN, "User Is Deleted");
+      }
+
+      if (
+        ifUserExistWithCredentials.role === Role.ADMIN ||
+        ifUserExistWithCredentials.role === Role.MANAGER
+      ) {
+        throw new AppError(
+          httpStatus.FORBIDDEN,
+          "Admins and Managers cannot log in via Google",
+        );
+      }
+
+      user = await prisma.user.update({
+        where: {
+          id: ifUserExistWithCredentials.id,
+        },
+        data: {
+          googleId: googleIdTokenPayload.sub,
+        },
+      });
+    } else {
+      // Google Register
+      const targetRole =
+        payload.role === Role.OWNER ? Role.OWNER : Role.TENANT;
+
+      user = await prisma.user.create({
+        data: {
+          name: googleIdTokenPayload.name,
+          email: googleIdTokenPayload.email,
+          role: targetRole,
+          googleId: googleIdTokenPayload.sub,
+          authProvider: AuthProvider.GOOGLE,
+          emailVerified: true,
+          imageUrl: googleIdTokenPayload.picture || "",
+          ...(targetRole === Role.TENANT
+            ? {
+                tenant: {
+                  create: {
+                    name: googleIdTokenPayload.name,
+                    email: googleIdTokenPayload.email,
+                  },
+                },
+              }
+            : {
+                owner: {
+                  create: {
+                    name: googleIdTokenPayload.name,
+                    email: googleIdTokenPayload.email,
+                    verificationStatus: OwnerVerificationStatus.PENDING,
+                  },
+                },
+              }),
+        },
+      });
+
+      try {
+        const tempatePath = path.join(
+          process.cwd(),
+          "src/app/templates/welcome.ejs",
+        );
+
+        const templateData = {
+          name: user.name,
+        };
+
+        const html = await ejs.renderFile(tempatePath, templateData);
+
+        await transporter.sendMail({
+          from: config.email_sender,
+          to: user.email,
+          subject: "Welcome To NestHive",
+          html,
+        });
+      } catch (err) {
+        console.warn("Failed to send welcome email:", err);
+      }
+    }
+  }
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User Not Found");
+  }
+
+  if (user.status === UserStatus.BLOCKED) {
+    throw new AppError(httpStatus.FORBIDDEN, "User Is Blocked");
+  }
+
+  if (user.isDeleted || user.status === UserStatus.DELETED) {
+    throw new AppError(httpStatus.FORBIDDEN, "User Is Deleted");
+  }
+
+  const jwtPayload = {
+    userId: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions,
+  );
+
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions,
+  );
+
+  return {
+    user,
+    accessToken,
+    refreshToken,
+  };
+};
+
+
+const setPassword = async (userId: string, payload: ISetPasswordPayload) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  if (user.role === Role.ADMIN || user.role === Role.MANAGER) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Admins and Managers cannot use set-password",
+    );
+  }
+
+  if (user.password !== null) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Password is already set for this account. Use change-password instead.",
+    );
+  }
+
+  const hashedPassword = await bcrypt.hash(
+    payload.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      password: hashedPassword,
+    },
+  });
+
+  return {
+    message:
+      "Password set successfully. You can now log in using either Google or your email and password.",
+  };
+};
+
 export const authService = {
   registerTenant,
   verifyTenantEmail,
   loginUser,
+  googleLogin,
+  setPassword,
   getMe,
   refreshToken,
   forgotPassword,
   resetPassword,
   changePassword,
 };
+

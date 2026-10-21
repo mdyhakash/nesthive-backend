@@ -25,8 +25,12 @@ import { utilityBillRoutes } from "./app/module/utilityBill/utilityBill.route";
 import { maintenanceRoutes } from "./app/module/maintenance/maintenance.route";
 import { notificationRoutes } from "./app/module/notification/notification.route";
 import { managerRoutes } from "./app/module/manager/manager.route";
+import { setupSwagger } from "./app/docs/swagger";
 
 const app: Application = express();
+
+// Initialize Swagger API Documentation
+setupSwagger(app);
 
 app.use(
   cors({
@@ -64,6 +68,7 @@ app.get("/", async (req: Request, res: Response) => {
   res.status(httpStatus.OK).json({
     success: true,
     message: "Welcome to NestHive Backend",
+    docs: "/api-docs",
   });
 });
 

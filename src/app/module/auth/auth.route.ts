@@ -48,4 +48,19 @@ router.patch(
   authController.changePassword,
 );
 
+router.post(
+  "/google",
+
+  validateRequest(authValidation.googleLoginZodSchema),
+  authController.googleLogin,
+);
+
+router.post(
+  "/set-password",
+  auth(Role.TENANT, Role.OWNER),
+  validateRequest(authValidation.setPasswordZodSchema),
+  authController.setPassword,
+);
+
 export const authRoutes = router;
+

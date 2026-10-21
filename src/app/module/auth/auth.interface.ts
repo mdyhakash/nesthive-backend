@@ -40,3 +40,12 @@ export interface IChangePasswordPayload {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface IGoogleLoginPayload {
+  idToken: string;
+  role?: Role;
+}
+
+export interface ISetPasswordPayload {
+  password: string;
+}

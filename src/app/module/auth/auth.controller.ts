@@ -187,13 +187,62 @@ const changePassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const googleLogin = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const result = await authService.googleLogin(payload);
+
+  const { accessToken, refreshToken, user } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24,
+  });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Google login successful",
+    data: {
+      user,
+      accessToken,
+      refreshToken,
+    },
+  });
+});
+
+const setPassword = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user!;
+  const payload = req.body;
+
+  const result = await authService.setPassword(user.userId, payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result.message,
+    data: null,
+  });
+});
+
 export const authController = {
   registerTenant,
   verifyTenantEmail,
   loginUser,
+  googleLogin,
+  setPassword,
   getMe,
   refreshToken,
   forgotPassword,
   resetPassword,
   changePassword,
 };
+
