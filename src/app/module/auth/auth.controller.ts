@@ -233,16 +233,38 @@ const setPassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const logout = catchAsync(async (req: Request, res: Response) => {
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+  });
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "none",
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Logged out successfully",
+    data: null,
+  });
+});
+
 export const authController = {
   registerTenant,
   verifyTenantEmail,
   loginUser,
   googleLogin,
   setPassword,
+  logout,
   getMe,
   refreshToken,
   forgotPassword,
   resetPassword,
   changePassword,
 };
+
 

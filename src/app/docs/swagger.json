@@ -490,7 +490,29 @@
         }
       }
     },
+    "/api/v1/auth/logout": {
+
+      "post": {
+        "summary": "User Logout (Clears auth cookies)",
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged out successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardSuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/me": {
+
       "get": {
         "summary": "Get authenticated user profile",
         "tags": [
