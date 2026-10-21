@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "start": "node dist/src/server.js",
+    "postinstall": "prisma generate",
+    "build": "tsup",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:check": "npx @biomejs/biome format ./src",
     "format:fix": "npx @biomejs/biome format --write ./src",
@@ -37,6 +38,7 @@
     "pg": "^8.22.0",
     "redis": "^6.2.1",
     "swagger-ui-express": "^5.0.1",
+    "tsup": "^9.0.0",
     "zod": "^4.5.4"
   },
   "devDependencies": {
