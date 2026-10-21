@@ -26,8 +26,39 @@ import { maintenanceRoutes } from "./app/module/maintenance/maintenance.route";
 import { notificationRoutes } from "./app/module/notification/notification.route";
 import { managerRoutes } from "./app/module/manager/manager.route";
 import { setupSwagger } from "./app/docs/swagger";
+import helmet from "helmet";
+import { rateLimit } from "express-rate-limit";
 
 const app: Application = express();
+
+// Security Headers (Helmet)
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  }),
+);
+
+// Rate Limiting to prevent API abuse
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 200, // Limit each IP to 200 requests per 15 minutes
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    success: false,
+    statusCode: httpStatus.TOO_MANY_REQUESTS,
+    message: "Too many requests from this IP, please try again after 15 minutes.",
+    errors: [
+      {
+        path: "",
+        message: "Rate limit exceeded. Please try again later.",
+      },
+    ],
+  },
+});
+
+app.use("/api", apiLimiter);
 
 // Initialize Swagger API Documentation
 setupSwagger(app);
@@ -45,6 +76,7 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(cookieParser());
+
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
