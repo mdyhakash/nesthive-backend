@@ -37,6 +37,8 @@ export const setupSwagger = (app: Application): void => {
       swaggerUi.serve,
       swaggerUi.setup(swaggerDoc, {
         customSiteTitle: "NestHive API Docs",
+        customCssUrl: "https://cloudflare.com",
+        customJs: ["https://cloudflare.com", "https://cloudflare.com"],
       }),
     );
   }
